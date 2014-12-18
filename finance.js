@@ -66,6 +66,17 @@ Finance.prototype.PP = function(numOfYears, cfs) {
     
 };
 
+// Return on Investment (ROI)  
+Finance.prototype.ROI = function(cf0, earnings) {
+  var roi = (earnings - Math.abs(cf0)) / Math.abs(cf0) * 100;
+  return Math.round(roi * 100) / 100;
+};
+
+// Amortization (monthly payments)
+Finance.prototype.MP = function (principal, rate, period) {
+  var numerator = principal * (rate / 12)
+};
+
 
 
 

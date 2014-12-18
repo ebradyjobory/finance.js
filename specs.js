@@ -31,5 +31,13 @@ describe('FinanceJS', function() {
     expect(pp).to.be.within(3.3, 3.6);
   });
 
+  it('should compute ROI', function() {
+    assert.equal(cal.ROI(55000, 60000), 9.09);
+  });
+
+  it('should compute MP (Monthly Payment / Amortization)', function() {
+    assert.equal(cal.MP(100000, 4.5, 30), 506.69);
+  });
+
 
 });
