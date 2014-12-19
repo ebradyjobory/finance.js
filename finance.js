@@ -73,8 +73,27 @@ Finance.prototype.ROI = function(cf0, earnings) {
 };
 
 // Amortization (monthly payments)
-Finance.prototype.MP = function (principal, rate, period) {
-  var numerator = principal * (rate / 12)
+Finance.prototype.MP = function (principal, rate, period, yearOrMonth) {
+  var ratePerPeriod = rate / 12 / 100;
+  // for inputs in years
+  if (!yearOrMonth) {
+    var numerator = ratePerPeriod * Math.pow((1 + ratePerPeriod), period * 12);
+    var denominator = Math.pow((1 + ratePerPeriod), period * 12) - 1;
+
+    var mp = principal * (numerator / denominator);
+    return Math.round(mp * 100) / 100;
+
+  // for inputs in months
+  } else if (yearOrMonth === 1) {
+    var numerator = ratePerPeriod * Math.pow((1 + ratePerPeriod), period);
+    var denominator = Math.pow((1 + ratePerPeriod), period) - 1;
+
+    var mp = principal * (numerator / denominator);
+    return Math.round(mp * 100) / 100;
+  } else {
+    console.log('not defined');
+  }
+  
 };
 
 

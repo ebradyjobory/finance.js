@@ -35,9 +35,16 @@ describe('FinanceJS', function() {
     assert.equal(cal.ROI(55000, 60000), 9.09);
   });
 
-  it('should compute MP (Monthly Payment / Amortization)', function() {
-    assert.equal(cal.MP(100000, 4.5, 30), 506.69);
+  it('should compute MP (Monthly Payment / Amortization) for inputs in years', function() {
+    // 0 if inputs are in years
+    assert.equal(cal.MP(20000, 7.5, 5, 0), 400.76);
   });
+
+  it('should compute MP (Monthly Payment / Amortization) for inputs in months', function() {
+    // 1 if inputs are in months
+    assert.equal(cal.MP(20000, 7.5, 60, 1), 400.76);
+  });
+
 
 
 });
