@@ -85,14 +85,14 @@ Finance.prototype.ROI = function(cf0, earnings) {
 };
 
 // Amortization
-Finance.prototype.AM = function (principle, rate, period, yearOrMonth) {
+Finance.prototype.AM = function (principal, rate, period, yearOrMonth) {
   var ratePerPeriod = rate / 12 / 100;
   // for inputs in years
   if (!yearOrMonth) {
     var numerator = ratePerPeriod * Math.pow((1 + ratePerPeriod), period * 12);
     var denominator = Math.pow((1 + ratePerPeriod), period * 12) - 1;
 
-    var am = principle * (numerator / denominator);
+    var am = principal * (numerator / denominator);
     return Math.round(am * 100) / 100;
 
   // for inputs in months
@@ -100,7 +100,7 @@ Finance.prototype.AM = function (principle, rate, period, yearOrMonth) {
     var numerator = ratePerPeriod * Math.pow((1 + ratePerPeriod), period);
     var denominator = Math.pow((1 + ratePerPeriod), period) - 1;
 
-    var am = principle * (numerator / denominator);
+    var am = principal * (numerator / denominator);
     return Math.round(am * 100) / 100;
   } else {
     console.log('not defined');
@@ -135,9 +135,9 @@ Finance.prototype.DF = function(rate, numOfPeriods) {
 };
 
 // Compound Interest (CI)
-Finance.prototype.CI = function(rate, numOfCompoundings, principle, numOfPeriods) {
+Finance.prototype.CI = function(rate, numOfCompoundings, principal, numOfPeriods) {
 
-  var CI = principle * Math.pow((1 + ((rate/100)/ numOfCompoundings)), numOfCompoundings * numOfPeriods);
+  var CI = principal * Math.pow((1 + ((rate/100)/ numOfCompoundings)), numOfCompoundings * numOfPeriods);
  
   return Math.round(CI * 100) / 100;
 };
