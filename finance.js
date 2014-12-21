@@ -1,3 +1,8 @@
+//Finance.js
+//For more information, visit http://financejs.org.
+//Created by Essam Al Joubori
+//Protected under MIT license
+
 // creating a Finance class
 var Finance = function() {};
 
@@ -113,12 +118,23 @@ Finance.prototype.PI = function(rate, cfs){
     // calculate discount factor
     discountFactor = 1 / Math.pow((1 + rate/100), (i - 1)); 
     totalOfPVs += arguments[i] * discountFactor;
-    console.log(totalOfPVs);
   }
   PI = totalOfPVs/Math.abs(arguments[1]);
   return Math.round(PI * 100) / 100;
 };
 
+// Discount Factor (DF)
+Finance.prototype.DF = function(rate, numOfPeriods) {
+  var dfs = [], discountFactor;
+
+  for (var i = 1; i < numOfPeriods; i++) {
+    discountFactor = 1 / Math.pow((1 + rate/100), (i - 1));
+    roundedDiscountFactor = Math.ceil(discountFactor * 1000)/1000;
+    console.log(roundedDiscountFactor);
+    dfs.push(roundedDiscountFactor);
+  }
+  return dfs;
+};
 
 
 
