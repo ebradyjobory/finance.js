@@ -1,7 +1,7 @@
 //Finance.js
 //For more information, visit http://financejs.org.
 //Created by Essam Al Joubori
-//Protected under MIT license
+//Copyright 2014 Essam Al Joubori, MIT license
 
 // creating a Finance class
 var Finance = function() {};
@@ -44,7 +44,6 @@ Finance.prototype.IRR = function(cfs) {
       currentNPV +=(arguments[i] / Math.pow((1 + rate), i - 1));
     }
     //currentNPV = Finance.prototype.NPV(rate, arguments[0], arguments[1], arguments[2], arguments[3]);
-    console.log(rate)
     if (currentNPV <= 0) {
       bestGuess = rate;
       return;
@@ -86,14 +85,14 @@ Finance.prototype.ROI = function(cf0, earnings) {
 };
 
 // Amortization
-Finance.prototype.AM = function (principal, rate, period, yearOrMonth) {
+Finance.prototype.AM = function (principle, rate, period, yearOrMonth) {
   var ratePerPeriod = rate / 12 / 100;
   // for inputs in years
   if (!yearOrMonth) {
     var numerator = ratePerPeriod * Math.pow((1 + ratePerPeriod), period * 12);
     var denominator = Math.pow((1 + ratePerPeriod), period * 12) - 1;
 
-    var am = principal * (numerator / denominator);
+    var am = principle * (numerator / denominator);
     return Math.round(am * 100) / 100;
 
   // for inputs in months
@@ -101,7 +100,7 @@ Finance.prototype.AM = function (principal, rate, period, yearOrMonth) {
     var numerator = ratePerPeriod * Math.pow((1 + ratePerPeriod), period);
     var denominator = Math.pow((1 + ratePerPeriod), period) - 1;
 
-    var am = principal * (numerator / denominator);
+    var am = principle * (numerator / denominator);
     return Math.round(am * 100) / 100;
   } else {
     console.log('not defined');
@@ -130,10 +129,17 @@ Finance.prototype.DF = function(rate, numOfPeriods) {
   for (var i = 1; i < numOfPeriods; i++) {
     discountFactor = 1 / Math.pow((1 + rate/100), (i - 1));
     roundedDiscountFactor = Math.ceil(discountFactor * 1000)/1000;
-    console.log(roundedDiscountFactor);
     dfs.push(roundedDiscountFactor);
   }
   return dfs;
+};
+
+// Compound Interest (CI)
+Finance.prototype.CI = function(rate, numOfCompoundings, principle, numOfPeriods) {
+
+  var CI = principle * Math.pow((1 + ((rate/100)/ numOfCompoundings)), numOfCompoundings * numOfPeriods);
+ 
+  return Math.round(CI * 100) / 100;
 };
 
 

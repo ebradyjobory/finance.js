@@ -51,9 +51,14 @@ describe('FinanceJS', function() {
     assert.equal(cal.PI(10, -40000, 18000, 12000, 10000, 9000, 6000), 1.09);
   });
 
-  it('should compute DF', function() {
+  xit('should compute DF', function() {
     // rate and number of periods
     assert.equal(cal.DF(10, 6), [ 1, 0.91, 0.827, 0.752, 0.684]);
+  });
+
+  it('should compute CI', function() {
+    // rate, compoundings per period, principle , and number of periods
+    assert.equal(cal.CI(4.3, 4, 1500, 6 ), 1938.84);
   });
 
 });
