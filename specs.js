@@ -6,6 +6,7 @@ var cal = new Finance();
 describe('FinanceJS', function() {
 
   it('should compute PV', function() {
+    // 1st argument is rate; the 2nd argument is the cash flow
     assert.equal(cal.PV(5, 100), 95.24);
   });
 
@@ -23,7 +24,7 @@ describe('FinanceJS', function() {
   });
   
   it('should compute PP for even cash flows', function() {
-    assert.equal(cal.PP(0, 105, 25), 4.2);
+    assert.equal(cal.PP(0, -105, 25), 4.2);
   });
 
   it('should compute PP for uneven cash flows', function() {
@@ -32,17 +33,17 @@ describe('FinanceJS', function() {
   });
 
   it('should compute ROI', function() {
-    assert.equal(cal.ROI(55000, 60000), 9.09);
+    assert.equal(cal.ROI(-55000, 60000), 9.09);
   });
 
-  it('should compute MP (Monthly Payment / Amortization) for inputs in years', function() {
+  it('should compute AM (Amortization) for inputs in years', function() {
     // 0 if inputs are in years
-    assert.equal(cal.MP(20000, 7.5, 5, 0), 400.76);
+    assert.equal(cal.AM(20000, 7.5, 5, 0), 400.76);
   });
 
-  it('should compute MP (Monthly Payment / Amortization) for inputs in months', function() {
+  it('should compute AM (Amortization) for inputs in months', function() {
     // 1 if inputs are in months
-    assert.equal(cal.MP(20000, 7.5, 60, 1), 400.76);
+    assert.equal(cal.AM(20000, 7.5, 60, 1), 400.76);
   });
 
 

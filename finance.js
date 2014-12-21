@@ -44,11 +44,11 @@ Finance.prototype.IRR = function(cfs) {
   return Math.round(bestGuess * 100) / 100;
 };
 
-// Payback Period (PP) = Cost of Project / Annual Cash Inflows
-Finance.prototype.PP = function(numOfYears, cfs) {
+// Payback Period (PP) = Initial Investment / Annual Cash Inflows
+Finance.prototype.PP = function(numOfPeriods, cfs) {
   // for even cash flows
-  if (numOfYears === 0) {
-    return arguments[1] / arguments[2];
+  if (numOfPeriods === 0) {
+    return Math.abs(arguments[1]) / arguments[2];
   }
   // for uneven cash flows
   //var cashFlow = arguments[1];
@@ -72,24 +72,24 @@ Finance.prototype.ROI = function(cf0, earnings) {
   return Math.round(roi * 100) / 100;
 };
 
-// Amortization (monthly payments)
-Finance.prototype.MP = function (principal, rate, period, yearOrMonth) {
+// Amortization
+Finance.prototype.AM = function (principal, rate, period, yearOrMonth) {
   var ratePerPeriod = rate / 12 / 100;
   // for inputs in years
   if (!yearOrMonth) {
     var numerator = ratePerPeriod * Math.pow((1 + ratePerPeriod), period * 12);
     var denominator = Math.pow((1 + ratePerPeriod), period * 12) - 1;
 
-    var mp = principal * (numerator / denominator);
-    return Math.round(mp * 100) / 100;
+    var am = principal * (numerator / denominator);
+    return Math.round(am * 100) / 100;
 
   // for inputs in months
   } else if (yearOrMonth === 1) {
     var numerator = ratePerPeriod * Math.pow((1 + ratePerPeriod), period);
     var denominator = Math.pow((1 + ratePerPeriod), period) - 1;
 
-    var mp = principal * (numerator / denominator);
-    return Math.round(mp * 100) / 100;
+    var am = principal * (numerator / denominator);
+    return Math.round(am * 100) / 100;
   } else {
     console.log('not defined');
   }
