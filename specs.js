@@ -46,6 +46,4 @@ describe('FinanceJS', function() {
     assert.equal(cal.AM(20000, 7.5, 60, 1), 400.76);
   });
 
-
-
 });
