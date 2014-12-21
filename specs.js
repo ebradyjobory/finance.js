@@ -18,9 +18,9 @@ describe('FinanceJS', function() {
     assert.equal(cal.NPV(10, -500000, 200000, 300000, 200000), 80015.03);
   });
 
-  it('should compute IRR', function() {
-    var irr = cal.IRR(-123400, 36200, 54800, 48100);
-    expect(irr).to.be.within(5.90, 6.00); // should be 5.96
+  xit('should compute IRR', function() {
+    var irr = cal.IRR(-500000, 200000, 300000, 200000);
+    expect(irr).to.be.within(18, 19); // should be 18.82
   });
   
   it('should compute PP for even cash flows', function() {
@@ -44,6 +44,11 @@ describe('FinanceJS', function() {
   it('should compute AM (Amortization) for inputs in months', function() {
     // 1 if inputs are in months
     assert.equal(cal.AM(20000, 7.5, 60, 1), 400.76);
+  });
+
+  it('should compute PI', function() {
+    // rate, initial investment, and cash flows
+    assert.equal(cal.PI(10, -40000, 18000, 12000, 10000, 9000, 6000), 1.09);
   });
 
 });

@@ -1,3 +1,4 @@
+// creating a Finance class
 var Finance = function() {};
 
 // Present Value (PV)
@@ -26,21 +27,28 @@ Finance.prototype.NPV = function (rate) {
 };
 
 // Internal Rate of Return (IRR)
-Finance.prototype.IRR = function(cfs) {  
+Finance.prototype.IRR = function(cfs) { 
+
   var bestGuess;
+
   var checkNPV = function(rate, arguments){
-    var currentNPV;
+    var currentNPV = arguments[0];
     // base case
     // TODO: to make the IRR function take more than 4 arguments
-    currentNPV = Finance.prototype.NPV(rate, arguments[0], arguments[1], arguments[2], arguments[3]);
-    console.log(currentNPV);
+    for (var i = 1; i < arguments.length; i++) {
+      currentNPV +=(arguments[i] / Math.pow((1 + rate), i - 1));
+    }
+    //currentNPV = Finance.prototype.NPV(rate, arguments[0], arguments[1], arguments[2], arguments[3]);
+    console.log(rate)
     if (currentNPV <= 0) {
       bestGuess = rate;
       return;
     } 
-    checkNPV(rate+= 0.01, arguments);
+    checkNPV(rate + 0.0001, arguments);
   }; 
+  
   checkNPV(0.01, arguments);
+
   return Math.round(bestGuess * 100) / 100;
 };
 
@@ -94,6 +102,21 @@ Finance.prototype.AM = function (principal, rate, period, yearOrMonth) {
     console.log('not defined');
   }
   
+};
+
+// Profitability Index (PI)
+Finance.prototype.PI = function(rate, cfs){
+  var totalOfPVs = 0, PI;
+ 
+  for (var i = 2; i < arguments.length; i++) {
+    var discountFactor;
+    // calculate discount factor
+    discountFactor = 1 / Math.pow((1 + rate/100), (i - 1)); 
+    totalOfPVs += arguments[i] * discountFactor;
+    console.log(totalOfPVs);
+  }
+  PI = totalOfPVs/Math.abs(arguments[1]);
+  return Math.round(PI * 100) / 100;
 };
 
 
