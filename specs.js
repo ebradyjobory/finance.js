@@ -14,11 +14,11 @@ describe('FinanceJS', function() {
     assert.equal(cal.FV(0.5, 1000, 12), 1061.68);
   });
 
-  it('should compute NPV', function() {
-    assert.equal(cal.NPV(10, -500000, 200000, 300000, 200000), 80015.03);
-  });
+  // it('should compute NPV', function() {
+  //   assert.equal(cal.NPV(10, -500000, 200000, 300000, 200000), 80015.03);
+  // });
 
-  xit('should compute IRR', function() {
+  it('should compute IRR', function() {
     var irr = cal.IRR(-500000, 200000, 300000, 200000);
     expect(irr).to.be.within(18, 19); // should be 18.82
   });
@@ -57,8 +57,33 @@ describe('FinanceJS', function() {
   });
 
   it('should compute CI', function() {
-    // rate, compoundings per period, principle , and number of periods
+    // rate, compoundings per period, principal , and number of periods
     assert.equal(cal.CI(4.3, 4, 1500, 6 ), 1938.84);
+  });
+
+  it('should compute CAGR', function() {
+    // begining value, Ending value, and number of periods
+    assert.equal(cal.CAGR(10000, 19500, 3 ), 24.93);
+  });
+
+  it('should compute LR', function() {
+    // total liabilities, total debts, and total income. Result is a ratio
+    assert.equal(cal.LR(25, 10, 20 ), 1.75);
+  });
+
+  it('should compute CC', function() {
+    // balance, monthly payment, daily interest rate
+    assert.equal(cal.LR(25, 10, 20), 1.75);
+  });
+
+  it('should compute R72', function() {
+    // interest rate
+    assert.equal(cal.R72(10), 7.2);
+  });
+
+  it('should compute WACC', function() {
+    // market value of equity, market value of debt, cost of equity, cost of debt, tax rate
+    assert.equal(cal.WACC(600000, 400000, 6, 5, 35), 4.9);
   });
 
 });

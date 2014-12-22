@@ -35,20 +35,21 @@ Finance.prototype.NPV = function (rate) {
 Finance.prototype.IRR = function(cfs) { 
 
   var bestGuess;
+  var currentNPV;
 
   var checkNPV = function(rate, arguments){
-    var currentNPV = arguments[0];
+    var npv = arguments[0];
     // base case
-    // TODO: to make the IRR function take more than 4 arguments
     for (var i = 1; i < arguments.length; i++) {
-      currentNPV +=(arguments[i] / Math.pow((1 + rate), i - 1));
+      npv +=(arguments[i] / Math.pow((1 + rate/100), i));
     }
-    //currentNPV = Finance.prototype.NPV(rate, arguments[0], arguments[1], arguments[2], arguments[3]);
+    currentNPV = Math.round(npv * 100) / 100;
     if (currentNPV <= 0) {
       bestGuess = rate;
+      console.log(bestGuess)
       return;
     } 
-    checkNPV(rate + 0.0001, arguments);
+    checkNPV(rate + 0.01, arguments);
   }; 
   
   checkNPV(0.01, arguments);
@@ -142,6 +143,48 @@ Finance.prototype.CI = function(rate, numOfCompoundings, principal, numOfPeriods
   return Math.round(CI * 100) / 100;
 };
 
+// Compound Annual Growth Rate (CAGR)
+Finance.prototype.CAGR = function(beginningValue, endingValue, numOfPeriods) {
+  
+  var CAGR = Math.pow((endingValue / beginningValue), 1 / numOfPeriods) - 1;
+  return Math.round(CAGR * 10000) / 100;
+
+};
+
+// Leverage Ratio (LR)
+Finance.prototype.LR = function(totalLiabilities, totalDebts, totalIncome) {
+  
+  return (totalLiabilities  + totalDebts) / totalIncome;
+
+};
+
+// // Credit Card Equation (CC)
+// Finance.prototype.CC = function(balance, monthlyPayment, dailyInterestRate) {
+  
+//   var log = Math.log( 1 + (balance / monthlyPayment) * 
+  
+//   return -(1/30) * 
+
+// };
 
 
+// Rule of 72
+Finance.prototype.R72 = function(rate) {
+  
+  return 72 / rate;
 
+};
+
+// Weighted Average Cost of Capital (WACC)
+Finance.prototype.WACC = function(marketValueOfEquity, marketValueOfDebt, costOfEquity, costOfDebt, taxRate) {
+  E = marketValueOfEquity;
+  D = marketValueOfDebt;
+  V =  marketValueOfEquity + marketValueOfDebt;
+  Re = costOfEquity;
+  Rd = costOfDebt;
+  T = taxRate;
+
+  var WACC = ((E / V) * Re/100) + (((D / V) * Rd/100) * (1 - T/100));
+  return Math.round(WACC * 1000) / 10;
+
+};
