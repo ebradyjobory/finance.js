@@ -15,7 +15,7 @@ This project is [hosted on GitHub](https://github.com/essamjoubori/finance.js). 
 **or**
 
 - Download or fork the repository from GitHub.
-- Extract the file finance.js from the project and include it in your application.
+- Extract the file finance.js from the project and include it in your application on the client side.
 
 ### Example Usage
 
