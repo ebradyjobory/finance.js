@@ -1,5 +1,5 @@
 Finance.js
-[financejs.org](http://financejs.org
+[financejs.org](http://financejs.org)
 ==========
 
 Finance.js makes it easy to incorporate common financial calculations into your application. The library is built on pure JavaScript without any dependencies.
