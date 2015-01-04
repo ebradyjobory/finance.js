@@ -17,11 +17,11 @@
     "finance.js"
   ],
   "author": "Essam Al Joubori <essam.joubori@gmail.com> (http://essam.io)",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/essamjoubori/finance.js/issues"
   },
-  "homepage": "https://github.com/essamjoubori/finance.js",
+  "homepage": "https://financejs.org",
   "devDependencies": {
     "chai": "^1.10.0",
     "mocha": "^2.1.0"
