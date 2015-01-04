@@ -188,3 +188,5 @@ Finance.prototype.WACC = function(marketValueOfEquity, marketValueOfDebt, costOf
   return Math.round(WACC * 1000) / 10;
 
 };
+
+module.exports = Finance;
