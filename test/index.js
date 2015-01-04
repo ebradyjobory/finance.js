@@ -1,3 +1,8 @@
+//Finance.js
+//For more information, visit http://financejs.org.
+//Created by Essam Al Joubori
+//Copyright 2014 - 2015 Essam Al Joubori, MIT license
+
 var should = require('chai').should(),
     Finance = require('../finance');
 

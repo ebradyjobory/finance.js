@@ -38,3 +38,8 @@ To see all available calculations and their usage, visit [financejs.org](http://
 ### Contributing
 
 Contributions are welcome to aid in the expansion of the library. In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality, and please lint and test your code.
+
+### To Do
+
+- Expand library with more financial calculations
+- Include edge cases in testing, if any
