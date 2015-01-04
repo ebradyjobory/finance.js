@@ -189,4 +189,8 @@ Finance.prototype.WACC = function(marketValueOfEquity, marketValueOfDebt, costOf
 
 };
 
-module.exports = Finance;
+if (typeof exports !== 'undefined') {
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = Finance;
+  }
+}

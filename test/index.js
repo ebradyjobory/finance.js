@@ -1,5 +1,5 @@
 var should = require('chai').should(),
-    Finance = require('../index');
+    Finance = require('../finance');
 
 var cal = new Finance();
 
