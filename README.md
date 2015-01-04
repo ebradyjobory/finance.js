@@ -1,8 +1,7 @@
 Finance.js
-[financejs.org](http://financejs.org)
 ==========
 
-Finance.js makes it easy to incorporate common financial calculations into your application. The library is built on pure JavaScript without any dependencies.
+Finance.js makes it easy to incorporate common financial calculations into your application. The library is built on pure JavaScript without any dependencies. For full documentation, please visit [financejs.org](http://financejs.org).
 
 This project is [hosted on GitHub](https://github.com/essamjoubori/finance.js). You can report bugs and discuss features on the [GitHub issues page](https://github.com/essamjoubori/finance.js/issues). Finance.js is available for use under the [MIT software license](https://github.com/essamjoubori/finance.js/blob/master/LICENSE.md).
 
