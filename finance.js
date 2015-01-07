@@ -2,20 +2,20 @@
 //For more information, visit http://financejs.org
 //Copyright 2014 - 2015 Essam Al Joubori, MIT license
 
-// creating a Finance class
+// Instantiate a Finance class
 var Finance = function() {};
 
 // Present Value (PV)
 Finance.prototype.PV = function (rate, cf1) {
-  var rate = rate/100;
+  var rate = rate/100, pv;
   pv = cf1 / (1 + rate);
   return Math.round(pv * 100) / 100;
 };
 
 // Future Value (FV)
 Finance.prototype.FV = function (rate, cf0, numOfPeriod) {
-  var rate = rate/100;
-  var fv = cf0 * Math.pow((1 + rate), numOfPeriod);
+  var rate = rate/100, fv;
+  fv = cf0 * Math.pow((1 + rate), numOfPeriod);
   return Math.round(fv * 100) / 100;
 };
 
@@ -30,10 +30,7 @@ Finance.prototype.NPV = function (rate) {
 
 // Internal Rate of Return (IRR)
 Finance.prototype.IRR = function(cfs) { 
-
-  var bestGuess;
-  var currentNPV;
-
+  var bestGuess, currentNPV;
   var checkNPV = function(rate, arguments){
     var npv = arguments[0];
     // base case
@@ -43,37 +40,32 @@ Finance.prototype.IRR = function(cfs) {
     currentNPV = Math.round(npv * 100) / 100;
     if (currentNPV <= 0) {
       bestGuess = rate;
-      console.log(bestGuess)
       return;
     } 
     checkNPV(rate + 0.01, arguments);
   }; 
-  
   checkNPV(0.01, arguments);
-
   return Math.round(bestGuess * 100) / 100;
 };
 
-// Payback Period (PP) = Initial Investment / Annual Cash Inflows
+// Payback Period (PP)
 Finance.prototype.PP = function(numOfPeriods, cfs) {
   // for even cash flows
   if (numOfPeriods === 0) {
     return Math.abs(arguments[1]) / arguments[2];
   }
   // for uneven cash flows
-  //var cashFlow = arguments[1];
-  var CumulativeCashFlow = arguments[1];
+  var cumulativeCashFlow = arguments[1];
   var yearsCounter = 1;  
   for (i = 2; i < arguments.length; i++) {
-    CumulativeCashFlow += arguments[i];
-    if (CumulativeCashFlow > 0) {
-      yearsCounter += (CumulativeCashFlow - arguments[i]) / arguments[i];
+    cumulativeCashFlow += arguments[i];
+    if (cumulativeCashFlow > 0) {
+      yearsCounter += (cumulativeCashFlow - arguments[i]) / arguments[i];
       return yearsCounter;
     } else {
       yearsCounter++;
     }
   }
-    
 };
 
 // Return on Investment (ROI)  
@@ -103,13 +95,11 @@ Finance.prototype.AM = function (principal, rate, period, yearOrMonth) {
   } else {
     console.log('not defined');
   }
-  
 };
 
 // Profitability Index (PI)
 Finance.prototype.PI = function(rate, cfs){
   var totalOfPVs = 0, PI;
- 
   for (var i = 2; i < arguments.length; i++) {
     var discountFactor;
     // calculate discount factor
@@ -123,7 +113,6 @@ Finance.prototype.PI = function(rate, cfs){
 // Discount Factor (DF)
 Finance.prototype.DF = function(rate, numOfPeriods) {
   var dfs = [], discountFactor;
-
   for (var i = 1; i < numOfPeriods; i++) {
     discountFactor = 1 / Math.pow((1 + rate/100), (i - 1));
     roundedDiscountFactor = Math.ceil(discountFactor * 1000)/1000;
@@ -134,32 +123,24 @@ Finance.prototype.DF = function(rate, numOfPeriods) {
 
 // Compound Interest (CI)
 Finance.prototype.CI = function(rate, numOfCompoundings, principal, numOfPeriods) {
-
   var CI = principal * Math.pow((1 + ((rate/100)/ numOfCompoundings)), numOfCompoundings * numOfPeriods);
- 
   return Math.round(CI * 100) / 100;
 };
 
 // Compound Annual Growth Rate (CAGR)
 Finance.prototype.CAGR = function(beginningValue, endingValue, numOfPeriods) {
-  
   var CAGR = Math.pow((endingValue / beginningValue), 1 / numOfPeriods) - 1;
   return Math.round(CAGR * 10000) / 100;
-
 };
 
 // Leverage Ratio (LR)
 Finance.prototype.LR = function(totalLiabilities, totalDebts, totalIncome) {
-  
   return (totalLiabilities  + totalDebts) / totalIncome;
-
 };
 
 // Rule of 72
 Finance.prototype.R72 = function(rate) {
-  
   return 72 / rate;
-
 };
 
 // Weighted Average Cost of Capital (WACC)
@@ -173,7 +154,6 @@ Finance.prototype.WACC = function(marketValueOfEquity, marketValueOfDebt, costOf
 
   var WACC = ((E / V) * Re/100) + (((D / V) * Rd/100) * (1 - T/100));
   return Math.round(WACC * 1000) / 10;
-
 };
 
 if (typeof exports !== 'undefined') {
