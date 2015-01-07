@@ -56,9 +56,9 @@ describe('FinanceJS', function() {
     cal.PI(10, -40000, 18000, 12000, 10000, 9000, 6000).should.equal(1.09);
   });
 
-  xit('should compute DF', function() {
+  it('should compute DF', function() {
     // rate and number of periods
-    cal.DF(10, 6).should.equal([ 1, 0.91, 0.827, 0.752, 0.684]);
+    cal.DF(10, 6).should.eql([ 1, 0.91, 0.827, 0.752, 0.684]);
   });
 
   it('should compute CI', function() {
