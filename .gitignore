@@ -1,3 +1,13 @@
+### os ###
+# Windows
+Thumbs.db
+
+# Linux
+*~
+
+# Mac
+.DS_Store
+
 ### node etc ###
 
 # Logs
