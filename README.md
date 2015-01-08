@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/essamjoubori/finance.js.png)](https://travis-ci.org/essamjoubori/finance.js)
 Finance.js
 ==========
 
