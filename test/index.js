@@ -51,6 +51,16 @@ describe('FinanceJS', function() {
     cal.AM(20000, 7.5, 60, 1).should.equal(400.76);
   });
 
+  it('should compute AM (Amortization) for inputs in years when payment is at the beginning of the month', function() {
+    // 1 if inputs are in months
+    cal.AM(20000, 7.5, 5, 0, 1).should.equal(398.27);
+  });
+
+  it('should compute AM (Amortization) for inputs in months when payment is at the beginning of the month', function() {
+    // 1 if inputs are in months
+    cal.AM(20000, 7.5, 60, 1, 1).should.equal(398.27);
+  });
+
   it('should compute PI', function() {
     // rate, initial investment, and cash flows
     cal.PI(10, -40000, 18000, 12000, 10000, 9000, 6000).should.equal(1.09);
