@@ -75,11 +75,17 @@ Finance.prototype.ROI = function(cf0, earnings) {
 };
 
 // Amortization
-Finance.prototype.AM = function (principal, rate, period, yearOrMonth) {
+Finance.prototype.AM = function (principal, rate, period, yearOrMonth, payAtBeginning) {
   var ratePerPeriod = rate / 12 / 100;
+
   // for inputs in years
   if (!yearOrMonth) {
-    var numerator = ratePerPeriod * Math.pow((1 + ratePerPeriod), period * 12);
+    var numInterestAccruals = period * 12;
+    if( payAtBeginning ){
+      //if payments are made in the beginning of the period, then interest shouldn't be calculated for first period
+      numInterestAccruals -= 1;
+    }
+    var numerator = ratePerPeriod * Math.pow((1 + ratePerPeriod), numInterestAccruals);
     var denominator = Math.pow((1 + ratePerPeriod), period * 12) - 1;
 
     var am = principal * (numerator / denominator);
@@ -87,7 +93,12 @@ Finance.prototype.AM = function (principal, rate, period, yearOrMonth) {
 
   // for inputs in months
   } else if (yearOrMonth === 1) {
-    var numerator = ratePerPeriod * Math.pow((1 + ratePerPeriod), period);
+    var numInterestAccruals = period;
+    if( payAtBeginning ){
+      //if payments are made in the beginning of the period, then interest shouldn't be calculated for first period
+      numInterestAccruals -= 1;
+    }
+    var numerator = ratePerPeriod * Math.pow((1 + ratePerPeriod), numInterestAccruals);
     var denominator = Math.pow((1 + ratePerPeriod), period) - 1;
 
     var am = principal * (numerator / denominator);
