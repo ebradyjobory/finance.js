@@ -76,36 +76,31 @@ Finance.prototype.ROI = function(cf0, earnings) {
 
 // Amortization
 Finance.prototype.AM = function (principal, rate, period, yearOrMonth, payAtBeginning) {
-  var numInterestAccruals, numerator, denominator, am;
+  var numerator, denominator, am;
   var ratePerPeriod = rate / 12 / 100;
 
   // for inputs in years
   if (!yearOrMonth) {
-    numInterestAccruals = period * 12;
-    if( payAtBeginning ){
-      //if payments are made in the beginning of the period, then interest shouldn't be calculated for first period
-      numInterestAccruals -= 1;
-    }
-    numerator = ratePerPeriod * Math.pow((1 + ratePerPeriod), numInterestAccruals);
+    numerator = buildNumerator(period * 12);
     denominator = Math.pow((1 + ratePerPeriod), period * 12) - 1;
-
-    am = principal * (numerator / denominator);
-    return Math.round(am * 100) / 100;
 
   // for inputs in months
   } else if (yearOrMonth === 1) {
-    numInterestAccruals = period;
+    numerator = buildNumerator(period)
+    denominator = Math.pow((1 + ratePerPeriod), period) - 1;
+
+  } else {
+    console.log('not defined');
+  }
+  am = principal * (numerator / denominator);
+  return Math.round(am * 100) / 100;
+
+  function buildNumerator(numInterestAccruals){
     if( payAtBeginning ){
       //if payments are made in the beginning of the period, then interest shouldn't be calculated for first period
       numInterestAccruals -= 1;
     }
-    numerator = ratePerPeriod * Math.pow((1 + ratePerPeriod), numInterestAccruals);
-    denominator = Math.pow((1 + ratePerPeriod), period) - 1;
-
-    am = principal * (numerator / denominator);
-    return Math.round(am * 100) / 100;
-  } else {
-    console.log('not defined');
+    return ratePerPeriod * Math.pow((1 + ratePerPeriod), numInterestAccruals);
   }
 };
 
