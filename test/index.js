@@ -101,4 +101,9 @@ describe('FinanceJS', function() {
     cal.WACC(600000, 400000, 6, 5, 35).should.equal(4.9);
   });
 
+  it('should compute PMT', function() {
+    // fractional rate, number of payments, loan principal
+    Number(cal.PMT(0.02,36,-1000000).toFixed(4)).should.equal(39232.8526)
+  });
+
 });
