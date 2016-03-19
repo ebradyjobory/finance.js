@@ -48,6 +48,52 @@ Finance.prototype.IRR = function(cfs) {
   return Math.round(bestGuess * 100) / 100;
 };
 
+function seekZero(fn) {
+  var x = 0;
+  while (fn(x) > 0) {
+    x += 1;
+  }
+  while (fn(x) < 0) {
+    x -= 0.01
+  }
+  return x + 0.01;
+}
+
+function seekZeroD(fn, d) {
+  var x = 0;
+  var y = fn(x);
+  while (Math.abs(y) > 0.0001) {
+    x -= y/d(x)
+    y = fn(x);
+  }
+  return x;
+}
+
+// Internal Rate of Return (IRR)
+Finance.prototype.IRRFast = function(cfs) { 
+
+  var args = arguments;
+  function npv(rate) {
+    var rrate = (1 + rate/100);
+    var npv = args[0];
+    for (var i = 1; i < args.length; i++) {
+      npv += (args[i] / Math.pow(rrate, i));
+    }
+    return npv;
+  }
+
+  function npvp(rate) {
+    var rrate = (1+rate/100);
+    var npvp = 0
+    for (var i = 1; i < args.length; i++) {
+      npvp -= (args[i]/Math.pow(rrate, i+1))*(1/100)
+    }
+    return npvp
+  }
+
+  return seekZeroD(npv, npvp);
+};
+
 // Payback Period (PP)
 Finance.prototype.PP = function(numOfPeriods, cfs) {
   // for even cash flows
