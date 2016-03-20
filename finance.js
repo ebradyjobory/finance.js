@@ -28,28 +28,9 @@ Finance.prototype.NPV = function (rate) {
   return Math.round(npv * 100) / 100;
 };
 
-// Internal Rate of Return (IRR)
-Finance.prototype.IRR = function(cfs) { 
-  var bestGuess, currentNPV;
-  var checkNPV = function(rate, arguments){
-    var npv = arguments[0];
-    // base case
-    for (var i = 1; i < arguments.length; i++) {
-      npv +=(arguments[i] / Math.pow((1 + rate/100), i));
-    }
-    currentNPV = Math.round(npv * 100) / 100;
-    if (currentNPV <= 0) {
-      bestGuess = rate;
-      return;
-    } 
-    checkNPV(rate + 0.01, arguments);
-  }; 
-  checkNPV(0.01, arguments);
-  return Math.round(bestGuess * 100) / 100;
-};
-
+// seekZero seeks the zero point of the function fn(x), accurate to within x \pm 0.01. fn(x) must be decreasing with x.
 function seekZero(fn) {
-  var x = 0;
+  var x = 1;
   while (fn(x) > 0) {
     x += 1;
   }
@@ -59,19 +40,8 @@ function seekZero(fn) {
   return x + 0.01;
 }
 
-function seekZeroD(fn, d) {
-  var x = 0;
-  var y = fn(x);
-  while (Math.abs(y) > 0.0001) {
-    x -= y/d(x)
-    y = fn(x);
-  }
-  return x;
-}
-
 // Internal Rate of Return (IRR)
-Finance.prototype.IRRFast = function(cfs) { 
-
+Finance.prototype.IRR = function(cfs) { 
   var args = arguments;
   function npv(rate) {
     var rrate = (1 + rate/100);
@@ -81,17 +51,7 @@ Finance.prototype.IRRFast = function(cfs) {
     }
     return npv;
   }
-
-  function npvp(rate) {
-    var rrate = (1+rate/100);
-    var npvp = 0
-    for (var i = 1; i < args.length; i++) {
-      npvp -= (args[i]/Math.pow(rrate, i+1))*(1/100)
-    }
-    return npvp
-  }
-
-  return seekZeroD(npv, npvp);
+  return Math.round(seekZero(npv) * 100) / 100;
 };
 
 // Payback Period (PP)
