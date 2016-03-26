@@ -163,6 +163,11 @@ Finance.prototype.WACC = function(marketValueOfEquity, marketValueOfDebt, costOf
   return Math.round(WACC * 1000) / 10;
 };
 
+// PMT calculates the payment for a loan based on constant payments and a constant interest rate
+Finance.prototype.PMT = function(fractionalRate, numOfPayments, principal) {
+  return -principal * fractionalRate/(1-Math.pow(1+fractionalRate,-numOfPayments))
+};
+
 if (typeof exports !== 'undefined') {
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = Finance;
