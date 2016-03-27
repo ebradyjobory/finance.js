@@ -28,24 +28,30 @@ Finance.prototype.NPV = function (rate) {
   return Math.round(npv * 100) / 100;
 };
 
+// seekZero seeks the zero point of the function fn(x), accurate to within x \pm 0.01. fn(x) must be decreasing with x.
+function seekZero(fn) {
+  var x = 1;
+  while (fn(x) > 0) {
+    x += 1;
+  }
+  while (fn(x) < 0) {
+    x -= 0.01
+  }
+  return x + 0.01;
+}
+
 // Internal Rate of Return (IRR)
 Finance.prototype.IRR = function(cfs) { 
-  var bestGuess, currentNPV;
-  var checkNPV = function(rate, arguments){
-    var npv = arguments[0];
-    // base case
-    for (var i = 1; i < arguments.length; i++) {
-      npv +=(arguments[i] / Math.pow((1 + rate/100), i));
+  var args = arguments;
+  function npv(rate) {
+    var rrate = (1 + rate/100);
+    var npv = args[0];
+    for (var i = 1; i < args.length; i++) {
+      npv += (args[i] / Math.pow(rrate, i));
     }
-    currentNPV = Math.round(npv * 100) / 100;
-    if (currentNPV <= 0) {
-      bestGuess = rate;
-      return;
-    } 
-    checkNPV(rate + 0.01, arguments);
-  }; 
-  checkNPV(0.01, arguments);
-  return Math.round(bestGuess * 100) / 100;
+    return npv;
+  }
+  return Math.round(seekZero(npv) * 100) / 100;
 };
 
 // Payback Period (PP)
