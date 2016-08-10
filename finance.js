@@ -174,6 +174,11 @@ Finance.prototype.PMT = function(fractionalRate, numOfPayments, principal) {
   return -principal * fractionalRate/(1-Math.pow(1+fractionalRate,-numOfPayments))
 };
 
+// IAR calculates the Inflation-adjusted return
+Finance.prototype.IAR = function(investmentReturn, inflationRate){
+  return 100 * (((1 + investmentReturn) / (1 + inflationRate)) - 1);
+}
+
 if (typeof exports !== 'undefined') {
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = Finance;

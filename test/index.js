@@ -105,5 +105,9 @@ describe('FinanceJS', function() {
     // fractional rate, number of payments, loan principal
     Number(cal.PMT(0.02,36,-1000000).toFixed(4)).should.equal(39232.8526)
   });
+    //investment return, inflation rate
+  it('should compute IAR', function() {
+    cal.IAR(0.08, 0.03).should.equal(4.854368932038833);
+  });
 
 });
