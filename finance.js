@@ -41,9 +41,21 @@ function seekZero(fn) {
 }
 
 // Internal Rate of Return (IRR)
-Finance.prototype.IRR = function(cfs) { 
+Finance.prototype.IRR = function(cfs) {
   var args = arguments;
+  var numberOfTries = 1;
+  // Cash flow values must contain at least one positive value and one negative value
+  var positive, negative;
+  Array.prototype.slice.call(args).forEach(function (value) {
+    if (value > 0) positive = true;
+    if (value < 0) negative = true;
+  })
+  if (!positive || !negative) throw new Error('IRR requires at least one positive value and one negative value');
   function npv(rate) {
+    numberOfTries++;
+    if (numberOfTries > 1000) {
+      throw new Error('IRR can\'t find a result');
+    }
     var rrate = (1 + rate/100);
     var npv = args[0];
     for (var i = 1; i < args.length; i++) {
@@ -62,7 +74,7 @@ Finance.prototype.PP = function(numOfPeriods, cfs) {
   }
   // for uneven cash flows
   var cumulativeCashFlow = arguments[1];
-  var yearsCounter = 1;  
+  var yearsCounter = 1;
   for (i = 2; i < arguments.length; i++) {
     cumulativeCashFlow += arguments[i];
     if (cumulativeCashFlow > 0) {
@@ -74,7 +86,7 @@ Finance.prototype.PP = function(numOfPeriods, cfs) {
   }
 };
 
-// Return on Investment (ROI)  
+// Return on Investment (ROI)
 Finance.prototype.ROI = function(cf0, earnings) {
   var roi = (earnings - Math.abs(cf0)) / Math.abs(cf0) * 100;
   return Math.round(roi * 100) / 100;
@@ -116,7 +128,7 @@ Finance.prototype.PI = function(rate, cfs){
   for (var i = 2; i < arguments.length; i++) {
     var discountFactor;
     // calculate discount factor
-    discountFactor = 1 / Math.pow((1 + rate/100), (i - 1)); 
+    discountFactor = 1 / Math.pow((1 + rate/100), (i - 1));
     totalOfPVs += arguments[i] * discountFactor;
   }
   PI = totalOfPVs/Math.abs(arguments[1]);

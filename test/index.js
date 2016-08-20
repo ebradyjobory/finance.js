@@ -27,7 +27,7 @@ describe('FinanceJS', function() {
     var irr = cal.IRR(-500000, 200000, 300000, 200000);
     (irr).should.be.within(18, 19); // should be ~18.82
   });
-  
+
   it('should compute PP for even cash flows', function() {
     cal.PP(0, -105, 25).should.equal(4.2);
   });
