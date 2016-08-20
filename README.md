@@ -24,10 +24,10 @@ Finance.js
 
  <h2 id="example-usage">Example Usage</h2>
 
- <pre><code>var Finance = require('financejs');<br>
- var finance = new Finance();<br><br>
- // To calculate Amortization<br>
- finance.AM(20000, 7.5, 5, 0);<br>
+ <pre><code>var Finance = require('financejs');
+ var finance = new Finance();
+ // To calculate Amortization
+ finance.AM(20000, 7.5, 5, 0);
  // => 400.76</code></pre>
 
  <h2 id="tests">Tests</h2>
@@ -47,13 +47,11 @@ Finance.js
 
  <pre><code>#Total Number of Payments Type = Years
  // e.g., If principal is $20,000, rate is 7.5%, total number of payments is 5, and payment type is 0 (years), monthly payment is $400.76.
-
  finance.AM(20000, 7.5, 5, 0);
  => 400.76
 
  #Total Number of Payments Type = Months
  // e.g.,If principal is $20,000, rate is 7.5%, total number of payments is 60, and payment type is 1 (months), monthly payment is $400.76.
-
  finance.AM(20000, 7.5, 60, 1);
  => 400.76</code></pre>
 
@@ -64,7 +62,6 @@ Finance.js
  <p>Compound Annual Growth Rate (CAGR) is the year-over-year growth rate of an investment over a specified period of time.<sup><a href="http://www.investopedia.com/terms/c/cagr.asp" target="_blank">2</a></sup></p>
 
  <pre><code>// e.g., If the beginning value is $10,000, the ending value is $19,500, and the number of periods is 3, the CAGR is 24.93%.
-
  finance.CAGR(10000, 19500, 3);
  => 24.93</code></pre>
 
@@ -75,7 +72,6 @@ Finance.js
  <p>Compound Interest is the interest calculated on the initial principal and also on the accumulated interest of previous periods of a deposit or loan.<sup><a href="http://www.investopedia.com/terms/c/compoundinterest.asp" target="_blank">3</a></sup></p>
 
  <pre><code>// e.g., If rate is 4.3%, the compoundings per period is 4, the principal is $1,500, and the number of periods is 6, the compound interest is $1,938.84.
-
  finance.CI(4.3, 4, 1500, 6 );
  => 1938.84</code></pre>
 
@@ -86,7 +82,6 @@ Finance.js
  <p>The Discount Factor (DF) is the factor by which a future cash flow must be multiplied in order to obtain the present value.<sup><a href="http://en.wikipedia.org/wiki/Discounting#Discount_factor" target="_blank">4</a></sup></p>
 
  <pre><code>// e.g., If rate is 10% and the number of periods is 6, the result is an array of discount factors: [1, 0.91, 0.827, 0.752, 0.684].
-
  finance.DF(10, 6);
  => [1, 0.91, 0.827, 0.752, 0.684]</code></pre>
 
@@ -108,7 +103,6 @@ Finance.js
  <p>Internal Rate of Return (IRR) is the discount rate often used in capital budgeting that makes the net present value of all cash flows from a particular project equal to zero.<sup><a href="http://www.investopedia.com/terms/i/irr.asp" target="_blank">6</a></sup></p>
 
  <pre><code>// e.g., If initial investment is -$500,000 and the cash flows are $200,000, $300,000, and $200,000, IRR is 18.82%.
-
  finance.IRR(-500000, 200000, 300000, 200000);
  => 18.82</code></pre>
 
@@ -119,7 +113,6 @@ Finance.js
  <p>Leverage Ratio (LR) is used to calculate the financial leverage of a company or individual to get an idea of the methods of financing or to measure ability to meet financial obligations.<sup><a href="http://www.investopedia.com/terms/l/leverageratio.asp" target="_blank">7</a></sup></p>
 
  <pre><code>// e.g., If total liabilities are $25, total debts are $10, and total income is $20, the leverage ratio is 1.75.
-
  finance.LR(25, 10, 20);
  => 1.75</code></pre>
 
@@ -132,7 +125,6 @@ Finance.js
  <p><code>[cash flows]</code> takes any number of projected cash flows.</p>
 
  <pre><code>// e.g., If discount rate is 10%, initial investment is -$1,000, cash flow in year 1 is $200,000, year 2 is $300,000, and year 3 is $200,000, the NPV is $80,015.03.
-
  finance.NPV(10, -500000, 200000, 300000, 200000);
  => 80015.03</code></pre>
 
@@ -148,13 +140,11 @@ Finance.js
 
  <pre><code>#Even Cash Flows
  // e.g., Because even cash flows have the same inflow during each period, we set 'number of periods' to '0.' If initial investment is -$105 and the annual cash flow is $25, the payback period is 4.2 years.
-
  finance.PP(0, -105, 25);
  => 4.2
 
  #Uneven Cash Flows
  // e.g., If number of periods is 5, initial investment is -$50, and the cash flows are $10, $13, $16, $19, and $22 for each year, the payback period is 3.42 years.
-
  finance.PP(5, -50, 10, 13, 16, 19, 22);
  => 3.42</code></pre>
 
@@ -165,7 +155,6 @@ Finance.js
  <p>Present Value (PV) is the current worth of a future sum of money or stream of cash flows given a specified rate of return.<sup><a href="http://www.investopedia.com/terms/p/presentvalue.asp" target="_blank">10</a></sup></p>
 
  <pre><code>// e.g., If rate is 5% and cash flow is $100, the PV is $95.24.
-
  finance.PV(5, 100);
  => 95.24</code></pre>
 
@@ -178,7 +167,6 @@ Finance.js
  <p><code>[cash flows]</code> takes any number of projected cash flows.</p>
 
  <pre><code>// e.g., If rate is 10%, initial investment is -$40,000, cash flows are $18,000, $12,000, $10,000, $9,000, and $6,000, PI is 1.09.
-
  finance.PI(10, -40000, 18000, 12000, 10000, 9000, 6000);
  => 1.09</code></pre>
 
@@ -189,7 +177,6 @@ Finance.js
  <p>Return on Investment (ROI) is a simple calculation that tells you the bottom line return of any investment.<sup><a href="http://www.investopedia.com/articles/basics/10/guide-to-calculating-roi.asp" target="_blank">12</a></sup></p>
 
  <pre><code>// e.g., If initial investment is -$55,000 and the earnings are $60,000, the return on investment is 9.09%.
-
  finance.ROI(-55000, 60000);
  => 9.09</code></pre>
 
@@ -200,7 +187,6 @@ Finance.js
  <p>Rule of 72 (R72) is a rule stating that in order to find the number of years required to double your money at a given interest rate, you divide the compound return into 72.<sup><a href="http://www.investopedia.com/terms/r/ruleof72.asp" target="_blank">13</a></sup></p>
 
  <pre><code>// e.g., If annual rate is 10%, rule of 72 is 7.2 years.
-
  finance.R72(10);
  => 7.2</code></pre>
 
@@ -211,7 +197,6 @@ Finance.js
  <p>Weighted Average Cost of Capital (WACC) is the rate that a company is expected to pay on average to all its security holders to finance its assets.<sup><a href="http://en.wikipedia.org/wiki/Weighted_average_cost_of_capital" target="_blank">14</a></sup></p>
 
  <pre><code>// e.g., If market value of equity is $600,000, market value of debt is $400,000, cost of equity is 6%, cost of debt is 5%, and tax rate is 35%, WACC is 4.9%.
-
  finance.WACC(600000, 400000, 6, 5, 35);
  => 4.9</code></pre>
 
@@ -221,8 +206,7 @@ Finance.js
 
   <p>Payment for a loan based on constant payments and a constant interest rate</p>
 
- <pre><code>
-   finance.PMT(0.02,36,-1000000);
+ <pre><code>finance.PMT(0.02,36,-1000000);
  => 39232.8526</code></pre>
 
  <h3 id="IAR">Inflation-adjusted Return<br>
@@ -231,8 +215,7 @@ Finance.js
 
   <p>Measure the return taking into account the time period's inflation rate</p>
 
- <pre><code>
-   finance.IAR(0.08, 0.03)
+ <pre><code>finance.IAR(0.08, 0.03)
  => 4.85</code></pre>
 
 ### Contributing
