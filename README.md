@@ -112,6 +112,17 @@ Finance.js
  finance.IRR(-500000, 200000, 300000, 200000);
  => 18.82</code></pre>
 
+<h3 id="XIRR">XIRR<br>
+
+ <code class="highlight">finance.XIRR([cash flows], [dates], guess);</code></h3>
+
+ <p>XIRR is used to determine the Internal Rate of Return when the cash flows are at Irregular intervals.<sup><a href="http://www.financialwisdomforum.org/gummy-stuff/xirr.htm" target="_blank">15</a></sup></p>
+
+ <pre><code>// e.g., If the cash flows are -$1,000 on 1st Nov 2015, -$100 on 01 Jul 2016 and $1,200 on 19 Jul 2016, the XIRR is 14.11%.
+
+ finance.XIRR([-1000, -100, 1200],[new Date(2015, 11, 1 ), new Date(2016, 7, 1 ), new Date(2016, 7, 19 )],0 );
+ => 14.11</code></pre>
+
  <h3 id="LR">Leverage Ratio (LR)<br>
 
  <code class="highlight">finance.LR(total liabilities, total debts, total income);</code></h3>
