@@ -34,6 +34,9 @@ Finance.js
 
  <pre><code>npm test</code></pre>
 
+
+<h2 id="tests">Available Methods</h2>
+
  <h3 id="Amortization">Amortization<br>
 
  <code class="highlight">finance.AM(principal, rate, total number of payments, [type]);</code></h3>
