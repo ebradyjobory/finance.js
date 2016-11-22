@@ -9,8 +9,7 @@ var Finance = function() {};
 Finance.prototype.PV = function (rate, cf1) {
   var rate = rate/100, pv;
   pv = cf1 / (1 + rate);
-  return Math.round(pv * 100) / 100;
-};
+ 
 
 // Future Value (FV)
 Finance.prototype.FV = function (rate, cf0, numOfPeriod) {
