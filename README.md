@@ -24,11 +24,20 @@ Finance.js
 
  <h2 id="example-usage">Example Usage</h2>
 
- <pre><code>var Finance = require('financejs');<br>
- var finance = new Finance();<br><br>
- // To calculate Amortization<br>
- finance.AM(20000, 7.5, 5, 0);<br>
- // => 400.76</code></pre>
+ 	var Finance = require('financejs');
+ 	var finance = new Finance();
+ 	// To calculate Amortization
+ 	finance.AM(20000, 7.5, 5, 0);
+ 	// => 400.76
+
+ ### Typescript
+
+	import { Finance } from 'financejs'
+	let finance = new Finance();
+	// To calculate Amortization
+	finance.AM(20000, 7.5, 5, 0);
+	// => 400.76
+
 
  <h2 id="tests">Tests</h2>
 

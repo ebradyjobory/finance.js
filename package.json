@@ -21,6 +21,9 @@
   "bugs": {
     "url": "https://github.com/essamjoubori/finance.js/issues"
   },
+  "typescript": {
+    "definition": "index.d.ts"
+  },
   "devDependencies": {
     "chai": "^1.10.0",
     "mocha": "^2.1.0"
