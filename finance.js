@@ -14,8 +14,8 @@ Finance.PV = function (rate, cf1) {
 
 /**
  * Present Value of Annuity.
- * @param rate Rate of interest, 100-based (15% = 15)
- * @param cf0 Initial cash flow
+ * @param rate Rate of interest, 100-based (15% = 15), per period
+ * @param cf0  Initial cash flow
  * @param numOfPeriod
  * @returns {number}
  * @see http://www.financeformulas.net/Present_Value_of_Annuity.html
@@ -195,9 +195,17 @@ Finance.WACC = function(marketValueOfEquity, marketValueOfDebt, costOfEquity, co
   return Math.round(WACC * 1000) / 10;
 };
 
-// PMT calculates the payment for a loan based on constant payments and a constant interest rate
-Finance.PMT = function(fractionalRate, numOfPayments, principal) {
-  return -principal * fractionalRate/(1-Math.pow(1+fractionalRate,-numOfPayments))
+/**
+ * Loan Payment calculation.
+ * @param rate Rate of interest, 100-based (15% = 15), per period
+ * @param principal Loan amount
+ * @param numOfPayments
+ * @see http://www.financeformulas.net/Loan_Payment_Formula.html
+ */
+Finance.PMT = function (rate, numOfPayments, principal) {
+  var rate = rate/100, pmt;
+  pmt = -(principal * rate) / (1 - Math.pow(1 + rate, -numOfPayments))
+  return Math.round(pmt * 100) / 100;
 };
 
 // IAR calculates the Inflation-adjusted return
