@@ -12,6 +12,20 @@ Finance.PV = function (rate, cf1) {
   return Math.round(pv * 100) / 100;
 };
 
+/**
+ * Present Value of Annuity.
+ * @param rate Rate of interest, 100-based (15% = 15)
+ * @param cf0 Initial cash flow
+ * @param numOfPeriod
+ * @returns {number}
+ * @see http://www.financeformulas.net/Present_Value_of_Annuity.html
+ */
+Finance.PVA = function (rate, cf0, numOfPeriod) {
+  var rate = rate/100, pva;
+  pva = cf0 * ((1 - Math.pow(1 + rate, - numOfPeriod)) / rate);
+  return Math.round(pva * 100) / 100;
+};
+
 // Future Value (FV)
 Finance.FV = function (rate, cf0, numOfPeriod) {
   var rate = rate/100, fv;
