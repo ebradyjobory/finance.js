@@ -193,6 +193,7 @@ Finance.prototype.IAR = function(investmentReturn, inflationRate){
 
 if (typeof exports !== 'undefined') {
   if (typeof module !== 'undefined' && module.exports) {
-    module.exports = Finance;
+      module.exports = Finance;
+      module.exports.Finance = Finance;
   }
 }
