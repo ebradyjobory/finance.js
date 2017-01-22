@@ -15,6 +15,11 @@ describe('FinanceJS', function() {
     cal.PV(5, 100).should.equal(95.24);
   });
 
+  it('should compute PV with num of periods', function() {
+    // 1st argument is rate; the 2nd argument is the cash flow
+    cal.PV(5, 100, 5).should.equal(78.35);
+  });
+
   it('should compute FV', function() {
     cal.FV(0.5, 1000, 12).should.equal(1061.68);
   });
