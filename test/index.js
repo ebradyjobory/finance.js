@@ -115,4 +115,7 @@ describe('FinanceJS', function() {
     cal.IAR(0.08, 0.03).should.equal(4.854368932038833);
   });
 
+  it('should compute XIRR', function() {
+    cal.XIRR([-1000, -100, 1200],[new Date(2015, 11, 1 ), new Date(2016, 7, 1 ), new Date(2016, 7, 19 )],0 ).should.equal(14.11);
+  });
 });
