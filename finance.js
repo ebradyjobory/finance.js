@@ -6,9 +6,10 @@
 var Finance = function() {};
 
 // Present Value (PV)
-Finance.prototype.PV = function (rate, cf1) {
+Finance.prototype.PV = function (rate, cf1, numOfPeriod) {
+  numOfPeriod = typeof numOfPeriod !== 'undefined' ? numOfPeriod : 1;
   var rate = rate/100, pv;
-  pv = cf1 / (1 + rate);
+  pv = cf1 / Math.pow((1 + rate),numOfPeriod);
   return Math.round(pv * 100) / 100;
 };
 

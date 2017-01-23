@@ -169,14 +169,22 @@ Finance.js
 
  <h3 id="PV">Present Value (PV)<br>
 
- <code class="highlight">finance.PV(rate, cash flow);</code></h3>
+ <code class="highlight">finance.PV(rate, cash flow, number of periods);</code></h3>
 
  <p>Present Value (PV) is the current worth of a future sum of money or stream of cash flows given a specified rate of return.<sup><a href="http://www.investopedia.com/terms/p/presentvalue.asp" target="_blank">10</a></sup></p>
+
+<p><code>number of periods</code> is optional and defaults to <code>1</code>.</p>
 
  <pre><code>// e.g., If rate is 5% and cash flow is $100, the PV is $95.24.
 
  finance.PV(5, 100);
+ => 95.24
+
+// e.g., If rate is 5%, cash flow is $100, and number of periods is 5, the PV is $78.35.
+
+ finance.PV(5, 100);
  => 95.24</code></pre>
+
 
  <h3 id="PI">Profitability Index (PI)<br>
 
