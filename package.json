@@ -1,6 +1,6 @@
 {
   "name": "financejs",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "description": "A JavaScript library for financial calculations",
   "main": "finance.js",
   "scripts": {
