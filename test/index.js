@@ -10,6 +10,11 @@ var cal = new Finance();
 
 describe('FinanceJS', function() {
 
+  it('should work as a class or namespace', function() {
+    cal.PV.should.equal(Finance.PV);
+    cal.PV(5, 100).should.equal(Finance.PV(5, 100));
+  });
+
   it('should compute PV', function() {
     // 1st argument is rate; the 2nd argument is the cash flow
     cal.PV(5, 100).should.equal(95.24);
