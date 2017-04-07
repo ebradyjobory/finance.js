@@ -3,10 +3,19 @@
 //Copyright 2014 - 2015 Essam Al Joubori, MIT license
 
 // Instantiate a Finance class
-var Finance = function() {};
+var Finance = function() {
+  //allowing for both usages: an instance object and a static class, namespacing functions
+  var methods = Object.getOwnPropertyNames(Finance)
+                      .filter(function (p) {
+                        return typeof Finance[p] == 'function' && p != 'Finance';
+                      });
+  methods.forEach(function(method) {
+    Finance.prototype[method] = Finance[method];
+  });
+};
 
 // Present Value (PV)
-Finance.prototype.PV = function (rate, cf1, numOfPeriod) {
+Finance.PV = function (rate, cf1, numOfPeriod) {
   numOfPeriod = typeof numOfPeriod !== 'undefined' ? numOfPeriod : 1;
   var rate = rate/100, pv;
   pv = cf1 / Math.pow((1 + rate),numOfPeriod);
@@ -14,14 +23,14 @@ Finance.prototype.PV = function (rate, cf1, numOfPeriod) {
 };
 
 // Future Value (FV)
-Finance.prototype.FV = function (rate, cf0, numOfPeriod) {
+Finance.FV = function (rate, cf0, numOfPeriod) {
   var rate = rate/100, fv;
   fv = cf0 * Math.pow((1 + rate), numOfPeriod);
   return Math.round(fv * 100) / 100;
 };
 
 // Net Present Value (NPV)
-Finance.prototype.NPV = function (rate) {
+Finance.NPV = function (rate) {
   var rate = rate/100, npv = arguments[1];
   for (var i = 2; i < arguments.length; i++) {
     npv +=(arguments[i] / Math.pow((1 + rate), i - 1));
@@ -42,7 +51,7 @@ function seekZero(fn) {
 }
 
 // Internal Rate of Return (IRR)
-Finance.prototype.IRR = function(cfs) {
+Finance.IRR = function(cfs) {
   var args = arguments;
   var numberOfTries = 1;
   // Cash flow values must contain at least one positive value and one negative value
@@ -68,7 +77,7 @@ Finance.prototype.IRR = function(cfs) {
 };
 
 // Payback Period (PP)
-Finance.prototype.PP = function(numOfPeriods, cfs) {
+Finance.PP = function(numOfPeriods, cfs) {
   // for even cash flows
   if (numOfPeriods === 0) {
     return Math.abs(arguments[1]) / arguments[2];
@@ -88,13 +97,13 @@ Finance.prototype.PP = function(numOfPeriods, cfs) {
 };
 
 // Return on Investment (ROI)
-Finance.prototype.ROI = function(cf0, earnings) {
+Finance.ROI = function(cf0, earnings) {
   var roi = (earnings - Math.abs(cf0)) / Math.abs(cf0) * 100;
   return Math.round(roi * 100) / 100;
 };
 
 // Amortization
-Finance.prototype.AM = function (principal, rate, period, yearOrMonth, payAtBeginning) {
+Finance.AM = function (principal, rate, period, yearOrMonth, payAtBeginning) {
   var numerator, denominator, am;
   var ratePerPeriod = rate / 12 / 100;
 
@@ -124,7 +133,7 @@ Finance.prototype.AM = function (principal, rate, period, yearOrMonth, payAtBegi
 };
 
 // Profitability Index (PI)
-Finance.prototype.PI = function(rate, cfs){
+Finance.PI = function(rate, cfs) {
   var totalOfPVs = 0, PI;
   for (var i = 2; i < arguments.length; i++) {
     var discountFactor;
@@ -137,7 +146,7 @@ Finance.prototype.PI = function(rate, cfs){
 };
 
 // Discount Factor (DF)
-Finance.prototype.DF = function(rate, numOfPeriods) {
+Finance.DF = function(rate, numOfPeriods) {
   var dfs = [], discountFactor;
   for (var i = 1; i < numOfPeriods; i++) {
     discountFactor = 1 / Math.pow((1 + rate/100), (i - 1));
@@ -148,24 +157,24 @@ Finance.prototype.DF = function(rate, numOfPeriods) {
 };
 
 // Compound Interest (CI)
-Finance.prototype.CI = function(rate, numOfCompoundings, principal, numOfPeriods) {
+Finance.CI = function(rate, numOfCompoundings, principal, numOfPeriods) {
   var CI = principal * Math.pow((1 + ((rate/100)/ numOfCompoundings)), numOfCompoundings * numOfPeriods);
   return Math.round(CI * 100) / 100;
 };
 
 // Compound Annual Growth Rate (CAGR)
-Finance.prototype.CAGR = function(beginningValue, endingValue, numOfPeriods) {
+Finance.CAGR = function(beginningValue, endingValue, numOfPeriods) {
   var CAGR = Math.pow((endingValue / beginningValue), 1 / numOfPeriods) - 1;
   return Math.round(CAGR * 10000) / 100;
 };
 
 // Leverage Ratio (LR)
-Finance.prototype.LR = function(totalLiabilities, totalDebts, totalIncome) {
+Finance.LR = function(totalLiabilities, totalDebts, totalIncome) {
   return (totalLiabilities  + totalDebts) / totalIncome;
 };
 
 // Rule of 72
-Finance.prototype.R72 = function(rate) {
+Finance.R72 = function(rate) {
   return 72 / rate;
 };
 
@@ -183,17 +192,17 @@ Finance.prototype.WACC = function(marketValueOfEquity, marketValueOfDebt, costOf
 };
 
 // PMT calculates the payment for a loan based on constant payments and a constant interest rate
-Finance.prototype.PMT = function(fractionalRate, numOfPayments, principal) {
+Finance.PMT = function(fractionalRate, numOfPayments, principal) {
   return -principal * fractionalRate/(1-Math.pow(1+fractionalRate,-numOfPayments))
 };
 
 // IAR calculates the Inflation-adjusted return
-Finance.prototype.IAR = function(investmentReturn, inflationRate){
+Finance.IAR = function(investmentReturn, inflationRate){
   return 100 * (((1 + investmentReturn) / (1 + inflationRate)) - 1);
 }
 
 // XIRR - IRR for irregular intervals
-Finance.prototype.XIRR = function(cfs, dts, guess) {
+Finance.XIRR = function(cfs, dts, guess) {
 if (cfs.length != dts.length) throw new Error('Number of cash flows and dates should match');
 
   var positive, negative;
@@ -254,3 +263,4 @@ if (typeof exports !== 'undefined') {
       module.exports.Finance = Finance;
   }
 }
+
