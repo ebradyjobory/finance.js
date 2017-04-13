@@ -164,9 +164,83 @@ Finance.prototype.LR = function(totalLiabilities, totalDebts, totalIncome) {
   return (totalLiabilities  + totalDebts) / totalIncome;
 };
 
+// Current Ratio (CR)
+Finance.prototype.CR = function(totalAssets,totalLiabilities){
+	return totalAssets/totalLiabilities;
+};
+
+// Quick Ratio (QR)
+Finance.prototype.QR = function(totalAssets,inventory,totalLiabilities) {
+	return (totalAssets - inventory) / totalLiabilities;
+};
+
+// Working Capital Turnover Ratio (WCTR)
+Finance.prototype.WCTR = function(totalAssets,totalLiabilities,sales){
+	return (totalAssets-totalLiabilities)/sales;
+};
+
 // Rule of 72
 Finance.prototype.R72 = function(rate) {
   return 72 / rate;
+};
+
+//YTM - Yield to maturity
+Finance.prototype.YTM = function(rate, parValue, marketPrice, durYear) {
+  var ytm = (rate + (parValue-marketPrice)/durYear)/((parValue + marketPrice) / 2);
+  return Math.round(ytm * 100) / 100;
+};
+
+//FCNR Quaterly Income Deposite
+Finance.prototype.FCNRQ = function(principal, rate ) {
+  var sum = rate/400;
+  var amount = (principal * rate)/((1 + s) + 1);
+  return Math.round(amount * 100) / 100;
+};
+
+//FCNR Monthly income Deposite
+Finance.prototype.FCNRM = function(principal, rate ) {
+  var sum = rate/400;
+  var exp = Math.pow(1 + sum, 6);
+  var amount = (principal * rate * sum) / (exp -1);
+  return Math.round(amount * 100) / 100;
+};
+
+// GII Gratuity in India
+Finance.prototype.GII = function(basicPay, dearnessAllowance, durYear ){
+  var gii = ((basicPay + dearnessAllowance ) * 15 * durYear) / 26;
+  return Math.round(gii * 100) / 100;
+};
+
+// VAT Value Added TAX
+Finance.prototype.TAX = function(originalCost, vatRate){
+  var tax = originalCost * vatRate / 100;
+  return Math.round(tax * 100) / 100;
+};
+
+//RPD Reinvestment Plan Deposit
+Finance.prototype.RPD = function(principal, rate, durYear){
+  var exp = Math.pow(1 + rate , durYear )
+  var amount = principal * exp ;
+  return Math.round(amount * 100) / 100;
+};
+
+//ATR Acid Test Ratio
+Finance.prototype.ATR = function(cash, accountreceivable, shorttrminv, liabilites ){
+  var atr =(cash + accountreceivable + shorttrminv) / liabilites;
+  return Math.round(atr * 100) / 100;
+};
+
+//APY Annual Percentage Yield
+Finance.prototype.APY = function(rate , durComp){
+  var exp = rate / durComp;
+  var apy = Math.pow(1 + exp , durComp) - 1 ;
+  return Math.round(apy * 100) / 100;
+};
+
+// RV Residual Value
+Finance.prototype.RV = function (fixedAssetCost, sRate , lifeSpan){
+  var rv = (fixedAssetCost - sRate) / lifeSpan;
+  return Math.round(rv * 100) / 100;
 };
 
 // Weighted Average Cost of Capital (WACC)
@@ -246,6 +320,29 @@ function sumEq(cfs, durs, guess) {
 //Returns duration in years between two dates
 function durYear(first, last) {
   return (Math.abs(last.getTime() - first.getTime()) / (1000 * 3600 * 24 * 365));
+}
+
+// SLN function calculates the straight line depreciation of an asset for one period
+Finance.prototype.SLN = function(cost,salvage,life){
+ var sln=(cost-salvage)/life;
+  return Math.round(sln * 100) / 100;
+}
+
+// SYD function calculates the sum-of-years' digits depreciation for a specified period in the lifetime of an asset.
+Finance.prototype.SYD = function(cost, salvage, life, period){
+  cost = parseFloat(cost);
+  salvage = parseFloat(salvage);
+  life = parseFloat(life);
+  period = parseInt(period);
+  var x = ((cost - salvage)*(life - period + 1))*2;
+  syd = x / (life * (life+1));
+  return Math.round(syd * 100) / 100; 
+}
+
+// DDB function calculates the depreciation of an asset, using the Double Declining Balance Method
+Finance.prototype.DDB = function(cost, salvage, life, period,factor=2){
+  var depreciation = Math.min(cost*(factor/life),cost-salvage)
+    return Math.round(depreciation * 100) / 100;
 }
 
 if (typeof exports !== 'undefined') {
