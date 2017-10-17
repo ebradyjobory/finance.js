@@ -23,6 +23,7 @@ Finance.js
  </ul>
 
  <h2 id="example-usage">Example Usage</h2>
+
 ### Client-Side (JavaScript)
 	<script src="/path/to/finance.js">
  		var finance = new Finance();
