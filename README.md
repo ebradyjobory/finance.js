@@ -23,21 +23,27 @@ Finance.js
  </ul>
 
  <h2 id="example-usage">Example Usage</h2>
-
+### Client-Side (JavaScript)
+	<script src="/path/to/finance.js">
+ 		var finance = new Finance();
+ 		// To calculate Amortization
+ 		finance.AM(20000, 7.5, 5, 0);
+ 		// => 400.76
+	</script>
+	
+### Server-Side (JavaScript)
  	var Finance = require('financejs');
  	var finance = new Finance();
  	// To calculate Amortization
  	finance.AM(20000, 7.5, 5, 0);
  	// => 400.76
 
- ### Typescript
-
+### Server-Side (TypeScript)
 	import { Finance } from 'financejs'
 	let finance = new Finance();
 	// To calculate Amortization
 	finance.AM(20000, 7.5, 5, 0);
 	// => 400.76
-
 
  <h2 id="tests">Tests</h2>
 
