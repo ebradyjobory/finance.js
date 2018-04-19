@@ -228,7 +228,13 @@ if (cfs.length != dts.length) throw new Error('Number of cash flows and dates sh
   var xirr = guess_last.toFixed(5) != guess.toFixed(5) ? null : guess*100;
 
   return Math.round(xirr * 100) / 100;
-};
+}
+
+//CAPM calculates expected return of an asset.
+Finance.prototype.CAPM = function (rf, beta, emr, err) {
+  var ans = rf/100 + beta * (emr/100 - rf/100);
+  return ans;
+}
 
 //Returns Sum of f(x)/f'(x)
 function sumEq(cfs, durs, guess) {
