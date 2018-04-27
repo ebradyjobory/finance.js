@@ -236,7 +236,8 @@ Finance.prototype.CAPM = function (rf, beta, emr, err) {
   return ans;
 }
 
-//Returns the Value of stock with dividend growing at a constant growth rate to perpetuity.
+//Returns the Value of stock with dividend growing at a 
+//constant growth rate to perpetuity.
 Finance.prototype.stockPV = function (g, ke, D0) {
   var valueOfStock = (D0 * (1 + g/100))/((ke/100) - (g/100))
   return Math.round(valueOfStock)
