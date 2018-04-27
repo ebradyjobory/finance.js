@@ -121,4 +121,7 @@ describe('FinanceJS', function() {
   it('should compute CAPM', function() {
     cal.CAPM(2, 2, 10).should.equal(0.18);
   });
+  it('should compute stockPV', function() {
+    cal.stockPV(5, 15, 10).should.equal(105);
+  });
 });

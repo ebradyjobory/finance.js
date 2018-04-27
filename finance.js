@@ -236,6 +236,12 @@ Finance.prototype.CAPM = function (rf, beta, emr, err) {
   return ans;
 }
 
+//Returns the Value of stock with dividend growing at a constant growth rate to perpetuity.
+Finance.prototype.stockPV = function (g, ke, D0) {
+  var valueOfStock = (D0 * (1 + g/100))/((ke/100) - (g/100))
+  return Math.round(valueOfStock)
+}
+
 //Returns Sum of f(x)/f'(x)
 function sumEq(cfs, durs, guess) {
   var sum_fx = 0;
@@ -253,6 +259,7 @@ function sumEq(cfs, durs, guess) {
 function durYear(first, last) {
   return (Math.abs(last.getTime() - first.getTime()) / (1000 * 3600 * 24 * 365));
 }
+
 
 if (typeof exports !== 'undefined') {
   if (typeof module !== 'undefined' && module.exports) {
