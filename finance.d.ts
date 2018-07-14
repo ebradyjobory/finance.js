@@ -38,6 +38,17 @@ export class Finance {
      * @param cashFlows
      */
     public IRR(cfs: number, ...cashFlows: number[]): number;
+    
+    /**
+     * Internal Rate of Return when the cash flows are at Irregular intervals
+     *
+     * @param {number} cfs
+     * @param {Date[]} dts
+     * @param {number} guess
+     * @returns {number}
+     * @constructor
+     */
+    public XIRR(cfs: number, dts: Date[], guess: number): number;
 
     /**
      * Payback Period (PP)
