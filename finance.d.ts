@@ -48,7 +48,7 @@ export class Finance {
      * @returns {number}
      * @constructor
      */
-    public XIRR(cfs: number, dts: Date[], guess: number): number;
+    public XIRR(cfs: number[], dts: Date[], guess: number): number;
 
     /**
      * Payback Period (PP)
