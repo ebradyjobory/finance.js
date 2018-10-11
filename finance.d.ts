@@ -9,17 +9,18 @@ export class Finance {
      * The current worth of a future sum of money or stream of cash flows given a specified rate of return
      * @param rate
      * @param cashFlow
+     * @param numOfPeriods
      */
-    public PV(rate: number, cashFlow: number): number;
+    public PV(rate: number, cashFlow: number, numOfPeriods?: number): number;
 
     /**
      * Future Value (FV)
      * The value of an asset or cash at a specified date in the future that is equivalent in value to a specified sum today
      * @param rate
      * @param cashFlow
-     * @param numOfPeriod
+     * @param numOfPeriods
      */
-    public FV(rate: number, cashFlow: number, numOfPeriod: number): number;
+    public FV(rate: number, cashFlow: number, numOfPeriods: number): number;
 
     /**
      * Net Present Value (NPV)
