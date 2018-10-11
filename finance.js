@@ -237,7 +237,20 @@ Finance.prototype.XIRR = function(cfs, dts, guess) {
   var xirr = guess_last.toFixed(5) != guess.toFixed(5) ? null : guess*100;
 
   return Math.round(xirr * 100) / 100;
-};
+}
+
+//CAPM calculates expected return of an asset.
+Finance.prototype.CAPM = function (rf, beta, emr, err) {
+  var ans = rf/100 + beta * (emr/100 - rf/100);
+  return ans;
+}
+
+//Returns the Value of stock with dividend growing at a 
+//constant growth rate to perpetuity.
+Finance.prototype.stockPV = function (g, ke, D0) {
+  var valueOfStock = (D0 * (1 + g/100))/((ke/100) - (g/100))
+  return Math.round(valueOfStock)
+}
 
 //Returns Sum of f(x)/f'(x)
 function sumEq(cfs, durs, guess) {
