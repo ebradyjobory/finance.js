@@ -4,7 +4,7 @@
 //Copyright 2014 - 2015 Essam Al Joubori, MIT license
 
 var should = require('chai').should(),
-    Finance = require('../finance');
+  Finance = require('../finance');
 
 var cal = new Finance();
 
@@ -29,8 +29,13 @@ describe('FinanceJS', function() {
   });
 
   it('should compute IRR', function() {
-    var irr = cal.IRR(-500000, 200000, 300000, 200000);
-    (irr).should.be.within(18, 19); // should be ~18.82
+    var data = {
+      depth : 10000,
+      cashFlow : [-6, 297, 307]
+    };
+    var irr = cal.IRR(data);
+    // should be ~4951.29
+    (irr).should.be.within(4951, 4952);
   });
 
   it('should compute PP for even cash flows', function() {
@@ -107,10 +112,10 @@ describe('FinanceJS', function() {
   });
 
   it('should compute PMT', function() {
-    // fractional rate, number of payments, loan principal
-    Number(cal.PMT(0.02,36,-1000000).toFixed(4)).should.equal(39232.8526)
+    // rate, number of payments, loan principal
+    Number(cal.PMT(2,36,-1000000).toFixed(2)).should.equal(39232.85)
   });
-    //investment return, inflation rate
+  //investment return, inflation rate
   it('should compute IAR', function() {
     cal.IAR(0.08, 0.03).should.equal(4.854368932038833);
   });
