@@ -115,8 +115,8 @@ Finance.prototype.AM = function (principal, rate, period, yearOrMonth, payAtBegi
   am = principal * (numerator / denominator);
   return Math.round(am * 100) / 100;
 
-  function buildNumerator(numInterestAccruals){
-    if( payAtBeginning ){
+  function buildNumerator(numInterestAccruals) {
+    if (payAtBeginning) {
       //if payments are made in the beginning of the period, then interest shouldn't be calculated for first period
       numInterestAccruals -= 1;
     }
@@ -125,7 +125,7 @@ Finance.prototype.AM = function (principal, rate, period, yearOrMonth, payAtBegi
 };
 
 // Profitability Index (PI)
-Finance.prototype.PI = function(rate, cfs){
+Finance.prototype.PI = function(rate, cfs) {
   var totalOfPVs = 0, PI;
   for (var i = 2; i < arguments.length; i++) {
     var discountFactor;
@@ -172,20 +172,28 @@ Finance.prototype.R72 = function(rate) {
 
 // Weighted Average Cost of Capital (WACC)
 Finance.prototype.WACC = function(marketValueOfEquity, marketValueOfDebt, costOfEquity, costOfDebt, taxRate) {
-  E = marketValueOfEquity;
-  D = marketValueOfDebt;
-  V =  marketValueOfEquity + marketValueOfDebt;
-  Re = costOfEquity;
-  Rd = costOfDebt;
-  T = taxRate;
+  var E = marketValueOfEquity;
+  var D = marketValueOfDebt;
+  var V =  marketValueOfEquity + marketValueOfDebt;
+  var Re = costOfEquity;
+  var Rd = costOfDebt;
+  var T = taxRate;
 
   var WACC = ((E / V) * Re/100) + (((D / V) * Rd/100) * (1 - T/100));
   return Math.round(WACC * 1000) / 10;
 };
 
-// PMT calculates the payment for a loan based on constant payments and a constant interest rate
-Finance.prototype.PMT = function(fractionalRate, numOfPayments, principal) {
-  return -principal * fractionalRate/(1-Math.pow(1+fractionalRate,-numOfPayments))
+/**
+ * Loan Payment calculation.
+ * @param rate Rate of interest, 100-based (15% = 15), per period
+ * @param principal Loan amount
+ * @param numOfPayments
+ * @see http://www.financeformulas.net/Loan_Payment_Formula.html
+ */
+Finance.prototype.PMT = function (rate, numOfPayments, principal) {
+  var rate = rate/100, pmt;
+  pmt = -(principal * rate) / (1 - Math.pow(1 + rate, -numOfPayments))
+  return Math.round(pmt * 100) / 100;
 };
 
 // IAR calculates the Inflation-adjusted return
@@ -249,9 +257,7 @@ function durYear(first, last) {
   return (Math.abs(last.getTime() - first.getTime()) / (1000 * 3600 * 24 * 365));
 }
 
-if (typeof exports !== 'undefined') {
-  if (typeof module !== 'undefined' && module.exports) {
-    module.exports = Finance;
-    module.exports.Finance = Finance;
-  }
+if (typeof exports !== 'undefined' && typeof module !== 'undefined' && module.exports) {
+  module.exports = Finance;
+  module.exports.Finance = Finance;
 }
