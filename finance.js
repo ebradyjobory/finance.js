@@ -43,7 +43,8 @@ function seekZero(fn) {
 
 // Internal Rate of Return (IRR)
 Finance.prototype.IRR = function(cfs) {
-  var args = arguments;
+  var depth = cfs.depth;
+  var args = cfs.cashFlow;
   var numberOfTries = 1;
   // Cash flow values must contain at least one positive value and one negative value
   var positive, negative;
@@ -54,7 +55,7 @@ Finance.prototype.IRR = function(cfs) {
   if (!positive || !negative) throw new Error('IRR requires at least one positive value and one negative value');
   function npv(rate) {
     numberOfTries++;
-    if (numberOfTries > 1000) {
+    if (numberOfTries > depth) {
       throw new Error('IRR can\'t find a result');
     }
     var rrate = (1 + rate/100);
@@ -103,7 +104,7 @@ Finance.prototype.AM = function (principal, rate, period, yearOrMonth, payAtBegi
     numerator = buildNumerator(period * 12);
     denominator = Math.pow((1 + ratePerPeriod), period * 12) - 1;
 
-  // for inputs in months
+    // for inputs in months
   } else if (yearOrMonth === 1) {
     numerator = buildNumerator(period)
     denominator = Math.pow((1 + ratePerPeriod), period) - 1;
@@ -202,7 +203,7 @@ Finance.prototype.IAR = function(investmentReturn, inflationRate){
 
 // XIRR - IRR for irregular intervals
 Finance.prototype.XIRR = function(cfs, dts, guess) {
-if (cfs.length != dts.length) throw new Error('Number of cash flows and dates should match');
+  if (cfs.length != dts.length) throw new Error('Number of cash flows and dates should match');
 
   var positive, negative;
   Array.prototype.slice.call(cfs).forEach(function (value) {
@@ -211,7 +212,7 @@ if (cfs.length != dts.length) throw new Error('Number of cash flows and dates sh
   });
 
   if (!positive || !negative) throw new Error('XIRR requires at least one positive value and one negative value');
-  
+
 
   guess = !!guess ? guess : 0;
 
@@ -225,12 +226,12 @@ if (cfs.length != dts.length) throw new Error('Number of cash flows and dates sh
   for(var i = 1; i < dts.length; i++) {
     durs.push(durYear(dts[0], dts[i]));
   }
-  
+
   do {
     guess_last = guess;
     guess = guess_last - sumEq(cfs, durs, guess_last);
     limit--;
-    
+
   }while(guess_last.toFixed(5) != guess.toFixed(5) && limit > 0);
 
   var xirr = guess_last.toFixed(5) != guess.toFixed(5) ? null : guess*100;
