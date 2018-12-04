@@ -224,10 +224,10 @@ Finance.prototype.RATE = function(numOfPayments, pmt, pv, fv, when) {
   return guess;
 
   function guess_diff(guess, nper, pmt, pv, fv, when) {
-    t1 = (guess+1)**nper;
-    t2 = (guess+1)**(nper-1);
+    t1 = Math.pow((guess+1), nper);
+    t2 = Math.pow((guess+1), nper-1);
     return ((fv + t1*pv + pmt*(t1 - 1)*(guess*when + 1)/guess) /
-                (nper*t2*pv - pmt*(t1 - 1)*(guess*when + 1)/(guess**2) + nper*pmt*t2*(guess*when + 1)/guess +
+                (nper*t2*pv - pmt*(t1 - 1)*(guess*when + 1)/Math.pow(guess,2) + nper*pmt*t2*(guess*when + 1)/guess +
                  pmt*(t1 - 1)*when/guess));
   }
 }
