@@ -139,6 +139,16 @@ export class Finance {
     public PMT(fractionalRate: number, numOfPayments: number, principal: number): number;
 
     /**
+     * Caculate the rate of interest per period.
+     * @param numOfPayments
+     * @param pmt Loan Payment
+     * @param pv Present Value
+     * @param fv Future Value
+     * @param when begin for 1, end for 0
+     */
+    public RATE(numOfPayments: number, pmt: number, pv: number, fv: number, when: number): number;
+
+    /**
      * Inflation-adjusted Return (IAR)
      * Measure the return taking into account the time period's inflation rate
      * @param investmentReturn
