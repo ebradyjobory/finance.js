@@ -201,6 +201,37 @@ Finance.prototype.IAR = function(investmentReturn, inflationRate){
   return 100 * (((1 + investmentReturn) / (1 + inflationRate)) - 1);
 }
 
+/**
+ * Caculate the rate of interest per period.
+ * @param numOfPayments
+ * @param pmt Loan Payment
+ * @param pv Present Value
+ * @param fv Future Value
+ * @param when begin for 1, end for 0
+ */
+Finance.prototype.RATE = function(numOfPayments, pmt, pv, fv, when) {
+
+  var guess = 0.1;
+  var limit = 100; //loop limit
+  var guess_last;
+
+  do {
+    guess_last = guess;
+    guess = guess_last - guess_diff(guess_last, numOfPayments, pmt, pv, fv, when);
+    limit--;
+  }while(guess_last.toFixed(5) != guess.toFixed(5) && limit > 0);
+
+  return guess;
+
+  function guess_diff(guess, nper, pmt, pv, fv, when) {
+    t1 = (guess+1)**nper;
+    t2 = (guess+1)**(nper-1);
+    return ((fv + t1*pv + pmt*(t1 - 1)*(guess*when + 1)/guess) /
+                (nper*t2*pv - pmt*(t1 - 1)*(guess*when + 1)/(guess**2) + nper*pmt*t2*(guess*when + 1)/guess +
+                 pmt*(t1 - 1)*when/guess));
+  }
+}
+
 // XIRR - IRR for irregular intervals
 Finance.prototype.XIRR = function(cfs, dts, guess) {
   if (cfs.length != dts.length) throw new Error('Number of cash flows and dates should match');
