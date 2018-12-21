@@ -4,6 +4,7 @@
   "description": "A JavaScript library for financial calculations",
   "main": "finance.js",
   "scripts": {
+    "lint": "eslint ./finance.js --fix",
     "test": "mocha"
   },
   "repository": {
@@ -26,7 +27,10 @@
   },
   "devDependencies": {
     "chai": "^1.10.0",
-    "mocha": "^2.1.0"
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "mocha": "^5.2.0"
   },
   "dependencies": {}
 }
