@@ -15,6 +15,10 @@ Finance.js
 
  <pre><code>npm install financejs --save</code></pre>
 
+ <p><strong>or via CDN</strong></p>
+ 
+ <pre><code><script src="//unpkg.com/financejs"></script></code></pre>
+ 
  <p><strong>or</strong></p>
 
  <ul>
