@@ -1,8 +1,8 @@
 {
   "name": "accurate-financejs",
-  "version": "4.1.0",
+  "version": "0.0.1",
   "description": "An accurate JavaScript library for financial calculations",
-  "main": "finance.js",
+  "main": "accurate-finance.js",
   "scripts": {
     "test": "mocha"
   },
@@ -29,5 +29,7 @@
     "chai": "^1.10.0",
     "mocha": "^2.1.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "decimal.js": "^10.1.1"
+  }
 }

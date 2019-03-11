@@ -7,19 +7,19 @@ Finance.js
 
  <h2 id="intro">Introduction</h2>
 
- <p>Finance.js makes it easy to incorporate common financial calculations into your application. The library is built on pure JavaScript without any dependencies.</p>
+ <p>accurate-finance.js makes it easy to incorporate common financial calculations into your application. It is a fork of ebradyjobory's <a href="https://github.com/ebradyjobory/finance.js">finance.js</a> with every function rewritten to use <a href="https://github.com/MikeMcl/decimal.js/">Decimal.js</a>.</p>
 
  <p>This project is <a href="https://github.com/VanTudor/accurate-finance.js">hosted on GitHub</a>. You can report bugs and discuss features on the <a href="https://github.com/VanTudor/accurate-finance.js/issues">GitHub issues page</a>. Finance.js is available for use under the <a href="https://github.com/VanTudor/accurate-finance.js/blob/master/LICENSE.md">MIT software license</a>.
 
  <h2 id="start">Getting Started</h2>
 
- <pre><code>npm install financejs --save</code></pre>
+ <!-- <pre><code>npm install accurate-financejs --save</code></pre> -->
 
- <p><strong>or</strong></p>
+ <!-- <p><strong>or</strong></p> -->
 
  <ul>
    <li>Download or fork the repository from GitHub.</li>
-   <li>Extract the file finance.js from the project and include it in your application on the client side.</li>
+   <li>Extract the file accurate-finance.js from the project and include it in your application on the client side.</li>
  </ul>
 
  <h2 id="example-usage">Example Usage</h2>

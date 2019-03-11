@@ -4,7 +4,7 @@
 //Copyright 2014 - 2015 Essam Al Joubori, MIT license
 
 var should = require('chai').should(),
-  Finance = require('../finance');
+  Finance = require('../accurate-finance');
 
 var cal = new Finance();
 
