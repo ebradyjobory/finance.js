@@ -228,44 +228,44 @@ Finance.prototype.IAR = function(investmentReturn, inflationRate){
   return Number(base.times(left.dividedBy(right).minus(1)));
 }
 
-// XIRR - IRR for irregular intervals
-Finance.prototype.XIRR = function(cfs, dts, guess) {
-  if (cfs.length != dts.length) throw new Error('Number of cash flows and dates should match');
+// // XIRR - IRR for irregular intervals
+// Finance.prototype.XIRR = function(cfs, dts, guess) {
+//   if (cfs.length != dts.length) throw new Error('Number of cash flows and dates should match');
 
-  var positive, negative;
-  Array.prototype.slice.call(cfs).forEach(function (value) {
-    if (value > 0) positive = true;
-    if (value < 0) negative = true;
-  });
+//   var positive, negative;
+//   Array.prototype.slice.call(cfs).forEach(function (value) {
+//     if (value > 0) positive = true;
+//     if (value < 0) negative = true;
+//   });
 
-  if (!positive || !negative) throw new Error('XIRR requires at least one positive value and one negative value');
+//   if (!positive || !negative) throw new Error('XIRR requires at least one positive value and one negative value');
 
 
-  guess = !!guess ? guess : 0;
+//   guess = !!guess ? guess : 0;
 
-  var limit = 100; //loop limit
-  var guess_last;
-  var durs = [];
+//   var limit = 100; //loop limit
+//   var guess_last;
+//   var durs = [];
 
-  durs.push(0);
+//   durs.push(0);
 
-  //Create Array of durations from First date
-  for(var i = 1; i < dts.length; i++) {
-    durs.push(durYear(dts[0], dts[i]));
-  }
+//   //Create Array of durations from First date
+//   for(var i = 1; i < dts.length; i++) {
+//     durs.push(durYear(dts[0], dts[i]));
+//   }
 
-  var decimizedGuess = new Decimal(guess);
-  do {
-    guess_last = new Decimal(decimizedGuess);
-    decimizedGuess = guess_last.minus(sumEq(cfs, durs, Number(guess_last)));
-    limit--;
+//   var decimizedGuess = new Decimal(guess);
+//   do {
+//     guess_last = new Decimal(decimizedGuess);
+//     decimizedGuess = guess_last.minus(sumEq(cfs, durs, Number(guess_last)));
+//     limit--;
 
-  }while(guess_last != decimizedGuess && limit > 0);
+//   }while(guess_last != decimizedGuess && limit > 0);
 
-  var xirr = !guess_last === decimizedGuess ? null : decimizedGuess.times(100);
+//   var xirr = !guess_last === decimizedGuess ? null : decimizedGuess.times(100);
 
-  return Number(xirr);
-}
+//   return Number(xirr);
+// }
 
 //CAPM calculates expected return of an asset.
 Finance.prototype.CAPM = function (rf, beta, emr, err) {

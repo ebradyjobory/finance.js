@@ -9,6 +9,7 @@ Finance.js
 
  <p>accurate-finance.js makes it easy to incorporate common financial calculations into your application. It is a fork of ebradyjobory's <a href="https://github.com/ebradyjobory/finance.js">finance.js</a> with every function rewritten to use <a href="https://github.com/MikeMcl/decimal.js/">Decimal.js</a>.</p>
 
+Note: XIRR doesn't work yet.
  <p>This project is <a href="https://github.com/VanTudor/accurate-finance.js">hosted on GitHub</a>. You can report bugs and discuss features on the <a href="https://github.com/VanTudor/accurate-finance.js/issues">GitHub issues page</a>. Finance.js is available for use under the <a href="https://github.com/VanTudor/accurate-finance.js/blob/master/LICENSE.md">MIT software license</a>.
 
  <h2 id="start">Getting Started</h2>
