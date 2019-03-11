@@ -1,25 +1,26 @@
 {
-  "name": "financejs",
+  "name": "accurate-financejs",
   "version": "4.1.0",
-  "description": "A JavaScript library for financial calculations",
+  "description": "An accurate JavaScript library for financial calculations",
   "main": "finance.js",
   "scripts": {
     "test": "mocha"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/essamjoubori/finance.js.git"
+    "url": "https://github.com/vantudor/accurate-finance.js.git"
   },
   "keywords": [
     "finance",
     "javaScript",
     "financejs",
-    "finance.js"
+    "finance.js",
+    "accurate-finance.js"
   ],
-  "author": "Essam Al Joubori <essam.joubori@gmail.com> (http://essam.io)",
+  "author": "Tudor Leustean <hi@leustean.net> (http://leustean.net)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/essamjoubori/finance.js/issues"
+    "url": "https://github.com/VanTudor/accurate-finance.js/issues"
   },
   "typescript": {
     "definition": "index.d.ts"

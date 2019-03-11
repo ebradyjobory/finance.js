@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/essamjoubori/finance.js.png)](https://travis-ci.org/essamjoubori/finance.js)
+[![Build Status](https://travis-ci.org/VanTudor/accurate-finance.js.svg?branch=master)](https://travis-ci.org/VanTudor/accurate-finance.js)
 
 Finance.js
 ==========
@@ -9,7 +9,7 @@ Finance.js
 
  <p>Finance.js makes it easy to incorporate common financial calculations into your application. The library is built on pure JavaScript without any dependencies.</p>
 
- <p>This project is <a href="https://github.com/essamjoubori/finance.js">hosted on GitHub</a>. You can report bugs and discuss features on the <a href="https://github.com/essamjoubori/finance.js/issues">GitHub issues page</a>. Finance.js is available for use under the <a href="https://github.com/essamjoubori/finance.js/blob/master/LICENSE.md">MIT software license</a>.
+ <p>This project is <a href="https://github.com/VanTudor/accurate-finance.js">hosted on GitHub</a>. You can report bugs and discuss features on the <a href="https://github.com/VanTudor/accurate-finance.js/issues">GitHub issues page</a>. Finance.js is available for use under the <a href="https://github.com/VanTudor/accurate-finance.js/blob/master/LICENSE.md">MIT software license</a>.
 
  <h2 id="start">Getting Started</h2>
 
