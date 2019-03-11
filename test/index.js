@@ -12,20 +12,20 @@ describe('FinanceJS', function() {
 
   it('should compute PV', function() {
     // 1st argument is rate; the 2nd argument is the cash flow
-    cal.PV(5, 100).should.equal(95.24);
+    cal.PV(5, 100).should.equal(95.23809523809524);
   });
 
   it('should compute PV with num of periods', function() {
     // 1st argument is rate; the 2nd argument is the cash flow
-    cal.PV(5, 100, 5).should.equal(78.35);
+    cal.PV(5, 100, 5).should.equal(78.3526166468459);
   });
 
   it('should compute FV', function() {
-    cal.FV(0.5, 1000, 12).should.equal(1061.68);
+    cal.FV(0.5, 1000, 12).should.equal(1061.6778118644995);
   });
 
   it('should compute NPV', function() {
-    cal.NPV(10, -500000, 200000, 300000, 200000).should.equal(80015.03);
+    cal.NPV(10, -500000, 200000, 300000, 200000).should.equal(80015.02629601803);
   });
 
   it('should compute IRR', function() {
@@ -53,42 +53,42 @@ describe('FinanceJS', function() {
 
   it('should compute AM (Amortization) for inputs in years', function() {
     // 0 if inputs are in years
-    cal.AM(20000, 7.5, 5, 0).should.equal(400.76);
+    cal.AM(20000, 7.5, 5, 0).should.equal(400.75897191247526);
   });
 
   it('should compute AM (Amortization) for inputs in months', function() {
     // 1 if inputs are in months
-    cal.AM(20000, 7.5, 60, 1).should.equal(400.76);
+    cal.AM(20000, 7.5, 60, 1).should.equal(400.75897191247526);
   });
 
   it('should compute AM (Amortization) for inputs in years when payment is at the beginning of the month', function() {
     // 1 if inputs are in months
-    cal.AM(20000, 7.5, 5, 0, 1).should.equal(398.27);
+    cal.AM(20000, 7.5, 5, 0, 1).should.equal(398.2697857515282);
   });
 
   it('should compute AM (Amortization) for inputs in months when payment is at the beginning of the month', function() {
     // 1 if inputs are in months
-    cal.AM(20000, 7.5, 60, 1, 1).should.equal(398.27);
+    cal.AM(20000, 7.5, 60, 1, 1).should.equal(398.2697857515282);
   });
 
   it('should compute PI', function() {
     // rate, initial investment, and cash flows
-    cal.PI(10, -40000, 18000, 12000, 10000, 9000, 6000).should.equal(1.09);
+    cal.PI(10, -40000, 18000, 12000, 10000, 9000, 6000).should.equal(1.0916697195298384);
   });
 
   it('should compute DF', function() {
     // rate and number of periods
-    cal.DF(10, 6).should.eql([ 1, 0.91, 0.827, 0.752, 0.684]);
+    cal.DF(10, 6).should.eql([1, 0.9090909090909091, 0.8264462809917356, 0.7513148009015778, 0.6830134553650707]);
   });
 
   it('should compute CI', function() {
     // rate, compoundings per period, principal , and number of periods
-    cal.CI(4.3, 4, 1500, 6 ).should.equal(1938.84);
+    cal.CI(4.3, 4, 1500, 6 ).should.equal(1938.8368221341036);
   });
 
   it('should compute CAGR', function() {
     // begining value, Ending value, and number of periods
-    cal.CAGR(10000, 19500, 3 ).should.equal(24.93);
+    cal.CAGR(10000, 19500, 3 ).should.equal(24.93329774613909);
   });
 
   it('should compute LR', function() {
@@ -117,11 +117,11 @@ describe('FinanceJS', function() {
   });
   //investment return, inflation rate
   it('should compute IAR', function() {
-    cal.IAR(0.08, 0.03).should.equal(4.854368932038833);
+    cal.IAR(0.08, 0.03).should.equal(4.854368932038835);
   });
 
   it('should compute XIRR', function() {
-    cal.XIRR([-1000, -100, 1200],[new Date(2015, 11, 1 ), new Date(2016, 7, 1 ), new Date(2016, 7, 19 )],0 ).should.equal(14.11);
+    cal.XIRR([-1000, -100, 1200],[new Date(2015, 11, 1 ), new Date(2016, 7, 1 ), new Date(2016, 7, 19 )],0 ).should.equal(14.107778714844969);
   });
   it('should compute CAPM', function() {
     cal.CAPM(2, 2, 10).should.equal(0.18);
