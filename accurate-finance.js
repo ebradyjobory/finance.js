@@ -243,7 +243,7 @@ Finance.prototype.XIRR = function(cfs, dts, guess) {
 
   guess = !!guess ? guess : 0;
 
-  var limit = 1000; //loop limit
+  var limit = 100; //loop limit
   var guess_last;
   var durs = [];
 
