@@ -40,6 +40,15 @@ export class Finance {
     public IRR(cfs: number, ...cashFlows: number[]): number;
 
     /**
+     * Internal Rate of Return (XIRR) over irregular intervals
+     * XIRR is used to determine the Internal Rate of Return when the cash flows are at Irregular intervals.
+     * @param cfs
+     * @param dts
+     * @param guess
+     */
+    public XIRR(cfs: number[], dts: Date[], guess: number): number;
+
+    /**
      * Payback Period (PP)
      * The length of time required to recover the cost of an investment
      * @param numOfPeriods
