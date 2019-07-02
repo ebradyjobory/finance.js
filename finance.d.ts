@@ -39,6 +39,8 @@ export class Finance {
      */
     public IRR(cfs: number, ...cashFlows: number[]): number;
 
+    public XIRR(cfs: number[], dts: Date[], guess: number): number;
+
     /**
      * Payback Period (PP)
      * The length of time required to recover the cost of an investment
