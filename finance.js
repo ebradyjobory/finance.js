@@ -29,16 +29,53 @@ Finance.prototype.NPV = function (rate) {
   return Math.round(npv * 100) / 100;
 };
 
+const MIN_NEGATIVE_RATE = -99.999;
+const MAX_POSITIVE_RATE = 10000;
+const RATE_DIFFERENCE_IGNORE = 0.001;
 // seekZero seeks the zero point of the function fn(x), accurate to within x \pm 0.01. fn(x) must be decreasing with x.
+// [Gang Li]: Use [binary search] idea to quickly narrow down the rate range, returns when difference is small enough
 function seekZero(fn) {
-  var x = 1;
-  while (fn(x) > 0) {
-    x += 1;
+  let lessRate = MIN_NEGATIVE_RATE;
+  let moreRate = MAX_POSITIVE_RATE;
+  let medianRate = (lessRate + moreRate) / 2;
+  let lastMedianRate;
+
+  let lessRateResult = fn(lessRate);
+  if (lessRateResult <= 0) {
+    // There is no need to calculate further when IRR result will be < MIN_NEGATIVE_RATE
+    return lessRate;
   }
-  while (fn(x) < 0) {
-    x -= 0.01
+
+  let moreRateResult = fn(moreRate);
+  if (moreRateResult >= 0) {
+    // There is no need to calculate further when IRR result will be > MAX_POSITIVE_RATE
+    return moreRate;
   }
-  return x + 0.01;
+
+  let medianRateResult = fn(medianRate);
+  while (lessRateResult > 0 && moreRateResult < 0) {
+    if (medianRateResult === 0) {
+      return medianRate;
+    }
+    else if (medianRateResult > 0) {
+      lessRate = medianRate;
+      lessRateResult = fn(lessRate);
+    }
+    else {
+      moreRate = medianRate;
+      moreRateResult = fn(moreRate);
+    }
+
+    lastMedianRate = medianRate;
+    medianRate = (lessRate + moreRate) / 2;
+    if (Math.abs(Math.abs(medianRate) - Math.abs(lastMedianRate)) < RATE_DIFFERENCE_IGNORE) {
+      break;
+    }
+
+    medianRateResult = fn(medianRate);
+  }
+
+  return medianRate;
 }
 
 // Internal Rate of Return (IRR)
