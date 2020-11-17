@@ -176,7 +176,7 @@ Finance.js
  // e.g., If number of periods is 5, initial investment is -$50, and the cash flows are $10, $13, $16, $19, and $22 for each year, the payback period is 3.42 years.
 
  finance.PP(5, -50, 10, 13, 16, 19, 22);
- => 3.42</code></pre>
+ => 3.58</code></pre>
 
  <h3 id="PV">Present Value (PV)<br>
 
