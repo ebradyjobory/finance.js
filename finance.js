@@ -80,7 +80,7 @@ Finance.prototype.PP = function(numOfPeriods, cfs) {
   for (i = 2; i < arguments.length; i++) {
     cumulativeCashFlow += arguments[i];
     if (cumulativeCashFlow > 0) {
-      yearsCounter += (cumulativeCashFlow - arguments[i]) / arguments[i];
+      yearsCounter += -1 + Math.abs((cumulativeCashFlow - arguments[i]) / arguments[i]);
       return yearsCounter;
     } else {
       yearsCounter++;
