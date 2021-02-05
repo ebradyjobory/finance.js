@@ -35,6 +35,7 @@ describe('FinanceJS', function() {
     };
     var irr = cal.IRR(data);
     // should be ~4951.29
+    console.log(irr);
     (irr).should.be.within(4951, 4952);
   });
 
